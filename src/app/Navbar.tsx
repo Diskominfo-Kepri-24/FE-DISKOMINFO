@@ -30,8 +30,8 @@ const profil = [
   { name: 'Moto & Lambang', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
 ]
 const program = [
-  { name: 'Magang', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
   { name: 'Buku Tamu', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
+  { name: 'Magang', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
   { name: 'Pelatihan', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
 ]
 const publikasi = [

@@ -6,9 +6,6 @@ import Navbar from './Navbar'
 import { usePathname } from 'next/navigation'
 
 const inter = Inter({ subsets: ['latin'] })
-
-
-
 const disableNavbar= ['/login', '/register'];
 export default function RootLayout({
   children,
@@ -20,7 +17,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`bg-slate-50 ${inter.className} `}>
         {
           !disableNavbar.includes(pathname) &&<Navbar/>
         }
