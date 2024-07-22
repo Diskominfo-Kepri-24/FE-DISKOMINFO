@@ -35,7 +35,7 @@ const program = [
   { name: 'Pelatihan', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
 ]
 const publikasi = [
-  { name: 'Berita', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
+  { name: 'Berita', description: 'Get a better understanding of your traffic', href: '/berita', icon: ChartPieIcon },
   { name: 'Gallery', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
   { name: 'Agenda', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
 ]
@@ -49,7 +49,7 @@ export default function Navbar() {
     <header className="bg-white border-b-4 border-blue-400 z-10">
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8">
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <a href="/" className="-m-1.5 p-1.5">
             <Image src={"/logo-diskominfo.svg"} alt='logo' width={250} height={50} />
           </a>
         </div>

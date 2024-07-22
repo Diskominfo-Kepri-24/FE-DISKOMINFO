@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navbar from './Navbar'
 import { usePathname } from 'next/navigation'
+import Footer from './Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 const disableNavbar= ['/login', '/register'];
@@ -24,7 +25,12 @@ export default function RootLayout({
         
         {
       children
-      }</body>
+      }
+      
+      {
+          !disableNavbar.includes(pathname) &&<Footer/>
+      }
+      </body>
     </html>
   )
 }

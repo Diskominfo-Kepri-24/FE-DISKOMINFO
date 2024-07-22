@@ -1,7 +1,26 @@
+"use client"
 import Image from "next/image";
-
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import { CustomLeftArrow, CustomRightArrow } from './CustomArrow';
+import Agenda from "./Agenda";
 
 export default function Home() {
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
   return (
     <>
     
@@ -47,10 +66,10 @@ export default function Home() {
     </div>
 
 {/* BERITA */}
-  <section className="py-6 sm:py-8 lg:py-12">
+  <div className="py-6 sm:py-8 lg:py-12">
       <div className="mx-auto max-w-screen-xl px-4 md:px-8">
           <div className="mb-10 md:mb-16">
-              <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Berita Terbaru</h2>
+              <h2 className="text-center mb-2 md:mb-6 lg:text-3xl font-semibold text-3xl text-gray-800 ">Berita Terbaru</h2>
               <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">Temukan Berita Terbaru Dari OPD Provinsi Kepulauan Riau</p>
           </div>
           <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-2 xl:gap-16">
@@ -119,14 +138,14 @@ export default function Home() {
               <a href="#_" className="relative inline-flex items-center px-12 py-3 overflow-hidden text-sm font-medium text-blue-600 border-2 border-blue-600 rounded-full hover:text-white group hover:bg-gray-50">
         <span className="absolute left-0 block w-full h-0 transition-all bg-blue-600 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
         <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </span>
         <span className="relative">Lihat Semua Berita</span>
         </a>
 
       </div>
 
-  </section>
+  </div>
  
  {/* PROGRAM */}
  <div className="container mx-auto px-10 py-12">
@@ -138,66 +157,229 @@ export default function Home() {
         <a href="#_" className="relative inline-flex items-center px-8 py-2 overflow-hidden text-sm font-medium text-blue-600 border-2 border-blue-600 rounded-full hover:text-white group hover:bg-gray-50">
             <span className="absolute left-0 block w-full h-0 transition-all bg-blue-600 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
             <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-3 ease">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </span>
             <span className="relative text-md">Lihat Semua Program</span>
         </a>
     </div>
 
+    <section className="py-6 sm:py-8 lg:py-1">
+      <div className="container mx-auto px-4">
+        {/* Carousel untuk layar besar */}
+        <div className="hidden sm:block">
+          <Carousel
+            responsive={responsive}
+            customLeftArrow={<CustomLeftArrow />}
+            customRightArrow={<CustomRightArrow />}
+          >
+            {/* Konten Carousel */}
+            <div className="p-4">
+              <a href="#" className="block bg-white w-full max-w-md rounded-2xl shadow-lg p-6 mx-auto border border-transparent hover:border-blue-500 transform transition-transform duration-300 hover:-translate-y-2 group cursor-pointer">
+                <div className="w-full h-32 overflow-hidden rounded-2xl">
+                  <Image src="/program/program-1.avif" alt="Logo" layout="responsive" width={100} height={48} className="object-cover w-full h-full rounded-t-2xl" />
+                </div>
+                <h3 className="mt-4 text-xl font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap hover:whitespace-normal hover:overflow-visible hover:cursor-pointer transition-all duration-300">
+                  Pelatihan Web Development Untuk Pemula Selama 30 Hari
+                </h3>
+                <div className="mt-4">
+                  <span className="py-1 px-3 flex font-medium items-center w-36 rounded-xl hover:bg-blue-100 text-sm text-blue-600 hover:text-blue-800">
+                    Selengkapnya
+                    <svg className="w-3 h-3 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+            <div className="p-4">
+              <a href="#" className="block bg-white w-full max-w-md rounded-2xl shadow-lg p-6 mx-auto border border-transparent hover:border-blue-500 transform transition-transform duration-300 hover:-translate-y-2 group cursor-pointer">
+                <div className="w-full h-32 overflow-hidden rounded-2xl">
+                  <Image src="/program/program-1.avif" alt="Logo" layout="responsive" width={100} height={48} className="object-cover w-full h-full rounded-t-2xl" />
+                </div>
+                <h3 className="mt-4 text-xl font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap hover:whitespace-normal hover:overflow-visible hover:cursor-pointer transition-all duration-300">
+                  Pelatihan Web Development Untuk Pemula Selama 30 Hari
+                </h3>
+                <div className="mt-4">
+                  <span className="py-1 px-3 flex font-medium items-center w-36 rounded-xl hover:bg-blue-100 text-sm text-blue-600 hover:text-blue-800">
+                    Selengkapnya
+                    <svg className="w-3 h-3 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+            <div className="p-4">
+              <a href="#" className="block bg-white w-full max-w-md rounded-2xl shadow-lg p-6 mx-auto border border-transparent hover:border-blue-500 transform transition-transform duration-300 hover:-translate-y-2 group cursor-pointer">
+                <div className="w-full h-32 overflow-hidden rounded-2xl">
+                  <Image src="/program/program-1.avif" alt="Logo" layout="responsive" width={100} height={48} className="object-cover w-full h-full rounded-t-2xl" />
+                </div>
+                <h3 className="mt-4 text-xl font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap hover:whitespace-normal hover:overflow-visible hover:cursor-pointer transition-all duration-300">
+                  Pelatihan Web Development Untuk Pemula Selama 30 Hari
+                </h3>
+                <div className="mt-4">
+                  <span className="py-1 px-3 flex font-medium items-center w-36 rounded-xl hover:bg-blue-100 text-sm text-blue-600 hover:text-blue-800">
+                    Selengkapnya
+                    <svg className="w-3 h-3 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+            <div className="p-4">
+              <a href="#" className="block bg-white w-full max-w-md rounded-2xl shadow-lg p-6 mx-auto border border-transparent hover:border-blue-500 transform transition-transform duration-300 hover:-translate-y-2 group cursor-pointer">
+                <div className="w-full h-32 overflow-hidden rounded-2xl">
+                  <Image src="/program/program-1.avif" alt="Logo" layout="responsive" width={100} height={48} className="object-cover w-full h-full rounded-t-2xl" />
+                </div>
+                <h3 className="mt-4 text-xl font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap hover:whitespace-normal hover:overflow-visible hover:cursor-pointer transition-all duration-300">
+                  Pelatihan Web Development Untuk Pemula Selama 30 Hari
+                </h3>
+                <div className="mt-4">
+                  <span className="py-1 px-3 flex font-medium items-center w-36 rounded-xl hover:bg-blue-100 text-sm text-blue-600 hover:text-blue-800">
+                    Selengkapnya
+                    <svg className="w-3 h-3 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+            <div className="p-4">
+              <a href="#" className="block bg-white w-full max-w-md rounded-2xl shadow-lg p-6 mx-auto border border-transparent hover:border-blue-500 transform transition-transform duration-300 hover:-translate-y-2 group cursor-pointer">
+                <div className="w-full h-32 overflow-hidden rounded-2xl">
+                  <Image src="/program/program-1.avif" alt="Logo" layout="responsive" width={100} height={48} className="object-cover w-full h-full rounded-t-2xl" />
+                </div>
+                <h3 className="mt-4 text-xl font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap hover:whitespace-normal hover:overflow-visible hover:cursor-pointer transition-all duration-300">
+                  Pelatihan Web Development Untuk Pemula Selama 30 Hari
+                </h3>
+                <div className="mt-4">
+                  <span className="py-1 px-3 flex font-medium items-center w-36 rounded-xl hover:bg-blue-100 text-sm text-blue-600 hover:text-blue-800">
+                    Selengkapnya
+                    <svg className="w-3 h-3 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+          
+          </Carousel>
+        </div>
 
-<div data-hs-carousel='{
-    "loadingClasses": "opacity-0"
-  }' className="relative">
-  <div className="hs-carousel relative overflow-hidden w-full min-h-96 bg-white rounded-lg">
-    <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
-      <div className="hs-carousel-slide">
-        <div className="flex justify-center h-full bg-gray-100 p-6 dark:bg-neutral-900">
-          <span className="self-center text-4xl text-gray-800 transition duration-700 dark:text-white">First slide</span>
+        {/* Konten untuk layar kecil */}
+        <div className="block sm:hidden">
+          <div className="flex flex-col items-center">
+            <div className="p-4">
+              <a href="#" className="block bg-white w-full max-w-md rounded-2xl shadow-lg p-6 mx-auto border border-transparent hover:border-blue-500 transform transition-transform duration-300 hover:-translate-y-2 group cursor-pointer">
+                <div className="w-full h-32 overflow-hidden rounded-2xl">
+                  <Image src="/program/program-1.avif" alt="Logo" layout="responsive" width={100} height={48} className="object-cover w-full h-full rounded-t-2xl" />
+                </div>
+                <h3 className="mt-4 text-xl font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap hover:whitespace-normal hover:overflow-visible hover:cursor-pointer transition-all duration-300">
+                  Pelatihan Web Development Untuk Pemula Selama 30 Hari
+                </h3>
+                <div className="mt-4">
+                  <span className="py-1 px-3 flex font-medium items-center w-36 rounded-xl hover:bg-blue-100 text-sm text-blue-600 hover:text-blue-800">
+                    Selengkapnya
+                    <svg className="w-3 h-3 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+            <div className="p-4">
+              <a href="#" className="block bg-white w-full max-w-md rounded-2xl shadow-lg p-6 mx-auto border border-transparent hover:border-blue-500 transform transition-transform duration-300 hover:-translate-y-2 group cursor-pointer">
+                <div className="w-full h-32 overflow-hidden rounded-2xl">
+                  <Image src="/program/program-1.avif" alt="Logo" layout="responsive" width={100} height={48} className="object-cover w-full h-full rounded-t-2xl" />
+                </div>
+                <h3 className="mt-4 text-xl font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap hover:whitespace-normal hover:overflow-visible hover:cursor-pointer transition-all duration-300">
+                  Pelatihan Web Development Untuk Pemula Selama 30 Hari
+                </h3>
+                <div className="mt-4">
+                  <span className="py-1 px-3 flex font-medium items-center w-36 rounded-xl hover:bg-blue-100 text-sm text-blue-600 hover:text-blue-800">
+                    Selengkapnya
+                    <svg className="w-3 h-3 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+            <div className="p-4">
+              <a href="#" className="block bg-white w-full max-w-md rounded-2xl shadow-lg p-6 mx-auto border border-transparent hover:border-blue-500 transform transition-transform duration-300 hover:-translate-y-2 group cursor-pointer">
+                <div className="w-full h-32 overflow-hidden rounded-2xl">
+                  <Image src="/program/program-1.avif" alt="Logo" layout="responsive" width={100} height={48} className="object-cover w-full h-full rounded-t-2xl" />
+                </div>
+                <h3 className="mt-4 text-xl font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap hover:whitespace-normal hover:overflow-visible hover:cursor-pointer transition-all duration-300">
+                  Pelatihan Web Development Untuk Pemula Selama 30 Hari
+                </h3>
+                <div className="mt-4">
+                  <span className="py-1 px-3 flex font-medium items-center w-36 rounded-xl hover:bg-blue-100 text-sm text-blue-600 hover:text-blue-800">
+                    Selengkapnya
+                    <svg className="w-3 h-3 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+            <div className="p-4">
+              <a href="#" className="block bg-white w-full max-w-md rounded-2xl shadow-lg p-6 mx-auto border border-transparent hover:border-blue-500 transform transition-transform duration-300 hover:-translate-y-2 group cursor-pointer">
+                <div className="w-full h-32 overflow-hidden rounded-2xl">
+                  <Image src="/program/program-1.avif" alt="Logo" layout="responsive" width={100} height={48} className="object-cover w-full h-full rounded-t-2xl" />
+                </div>
+                <h3 className="mt-4 text-xl font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap hover:whitespace-normal hover:overflow-visible hover:cursor-pointer transition-all duration-300">
+                  Pelatihan Web Development Untuk Pemula Selama 30 Hari
+                </h3>
+                <div className="mt-4">
+                  <span className="py-1 px-3 flex font-medium items-center w-36 rounded-xl hover:bg-blue-100 text-sm text-blue-600 hover:text-blue-800">
+                    Selengkapnya
+                    <svg className="w-3 h-3 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+            <div className="p-4">
+              <a href="#" className="block bg-white w-full max-w-md rounded-2xl shadow-lg p-6 mx-auto border border-transparent hover:border-blue-500 transform transition-transform duration-300 hover:-translate-y-2 group cursor-pointer">
+                <div className="w-full h-32 overflow-hidden rounded-2xl">
+                  <Image src="/program/program-1.avif" alt="Logo" layout="responsive" width={100} height={48} className="object-cover w-full h-full rounded-t-2xl" />
+                </div>
+                <h3 className="mt-4 text-xl font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap hover:whitespace-normal hover:overflow-visible hover:cursor-pointer transition-all duration-300">
+                  Pelatihan Web Development Untuk Pemula Selama 30 Hari
+                </h3>
+                <div className="mt-4">
+                  <span className="py-1 px-3 flex font-medium items-center w-36 rounded-xl hover:bg-blue-100 text-sm text-blue-600 hover:text-blue-800">
+                    Selengkapnya
+                    <svg className="w-3 h-3 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="hs-carousel-slide">
-        <div className="flex justify-center h-full bg-gray-200 p-6 dark:bg-neutral-800">
-          <span className="self-center text-4xl text-gray-800 transition duration-700 dark:text-white">Second slide</span>
-        </div>
-      </div>
-      <div className="hs-carousel-slide">
-        <div className="flex justify-center h-full bg-gray-300 p-6 dark:bg-neutral-700">
-          <span className="self-center text-4xl text-gray-800 transition duration-700 dark:text-white">Third slide</span>
-        </div>
-      </div>
+    </section>
+
+
+
+
+</div>
+
+{/* AGENDA */}
+<div className="container mx-auto p-4">
+      <h1 className="text-center font-semibold text-3xl text-gray-800 mb-4">Event /Agenda</h1>
+      <Agenda />
     </div>
-  </div>
-
-  <button type="button" className="hs-carousel-prev hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 rounded-s-lg dark:text-white dark:hover:bg-white/10">
-    <span className="text-2xl" aria-hidden="true">
-      <svg className="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m15 18-6-6 6-6"></path>
-      </svg>
-    </span>
-    <span className="sr-only">Previous</span>
-  </button>
-  <button type="button" className="hs-carousel-next hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 rounded-e-lg dark:text-white dark:hover:bg-white/10">
-    <span className="sr-only">Next</span>
-    <span className="text-2xl" aria-hidden="true">
-      <svg className="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m9 18 6-6-6-6"></path>
-      </svg>
-    </span>
-  </button>
-
-  <div className="hs-carousel-pagination flex justify-center absolute bottom-3 start-0 end-0 space-x-2">
-    <span className="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
-    <span className="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
-    <span className="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
-  </div>
-</div>
-
-</div>
 
    
 {/* LOKASI */}
   <div className="py-12 px-10">
-    <h1 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Lokasi</h1>
+    <h1 className=" text-center font-semibold mb-10 text-3xl text-gray-800">Lokasi</h1>
     <div className="flex justify-center">
         <div className="w-full max-w-4xl h-[600px]">
             <iframe 
