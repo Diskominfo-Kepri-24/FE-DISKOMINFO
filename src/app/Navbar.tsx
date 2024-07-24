@@ -36,7 +36,7 @@ const program = [
 ]
 const publikasi = [
   { name: 'Berita', description: 'Get a better understanding of your traffic', href: '/berita', icon: ChartPieIcon },
-  { name: 'Gallery', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
+  { name: 'Gallery', description: 'Speak directly to your customers', href: '/gallery', icon: CursorArrowRaysIcon },
   { name: 'Agenda', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
 ]
 

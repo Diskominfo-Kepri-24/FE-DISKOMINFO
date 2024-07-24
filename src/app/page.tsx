@@ -371,7 +371,7 @@ export default function Home() {
 </div>
 
 {/* AGENDA */}
-<div className="container mx-auto p-4">
+<div className="container mx-auto px-4 pb-12">
       <h1 className="text-center font-semibold text-3xl text-gray-800 mb-4">Event /Agenda</h1>
       <Agenda />
     </div>
