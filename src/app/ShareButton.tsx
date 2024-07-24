@@ -20,7 +20,7 @@ const ShareButton = () => {
     <div className="relative inline-block ">
       <button
         onClick={toggleOptions}
-        className="text-white bg-green-500 hover:bg-green-600 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+        className="text-white bg-blue-500 hover:bg-blue-600 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
       >
         <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fillRule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm3.646 5.354a.5.5 0 00-.707 0L9 11.293 7.354 9.646a.5.5 0 00-.708.708l2 2a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" clipRule="evenodd" />

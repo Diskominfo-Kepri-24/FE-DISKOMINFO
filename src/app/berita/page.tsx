@@ -9,7 +9,7 @@ export default function Berita () {
       ]
     return (
         <>
-        <div className="bg-slate-50">
+        <div className="bg-slate-50 pt-20">
             {/* BREADCRUMB */}
             <div className="container mx-auto px-10 pt-12">
                 <nav className="flex" aria-label="Breadcrumb">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import {
   Dialog,
   DialogPanel,
@@ -23,11 +23,11 @@ import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/
 import Image from 'next/image'
 
 const profil = [
-  { name: 'Visi Misi', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
-  { name: 'Tugas dan Fungsi', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
-  { name: 'Struktur Organisasi', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
-  { name: 'Informasi Pejabat', description: 'Connect with third-party tools', href: '#', icon: SquaresPlusIcon },
-  { name: 'Moto & Lambang', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
+  { name: 'Visi Misi', description: 'Get a better understanding of your traffic', href: '/profil', icon: ChartPieIcon },
+  // { name: 'Tugas dan Fungsi', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
+  // { name: 'Struktur Organisasi', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
+  { name: 'Informasi Pejabat', description: 'Connect with third-party tools', href: '/informasi-pejabat', icon: SquaresPlusIcon },
+  // { name: 'Moto & Lambang', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
 ]
 const program = [
   { name: 'Buku Tamu', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
@@ -42,11 +42,27 @@ const publikasi = [
 
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 30) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
     <>
-    <header className="bg-white border-b-4 border-blue-400 z-10">
+    <header className={`fixed w-full z-20 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-md' : 'bg-white border-b-4 border-blue-400'}`}>
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8">
         <div className="flex lg:flex-1">
           <a href="/" className="-m-1.5 p-1.5">
@@ -64,7 +80,7 @@ export default function Navbar() {
           </button>
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-6">
-        <a href="#" className="text-xs hover:bg-blue-50 px-4 py-2 rounded-md hover:text-blue-500 font-semibold leading-6 text-gray-500">
+        <a href="/" className="text-xs hover:bg-blue-50 px-4 py-2 rounded-md hover:text-blue-500 font-semibold leading-6 text-gray-500">
             Beranda
           </a>
           <Popover className="relative">

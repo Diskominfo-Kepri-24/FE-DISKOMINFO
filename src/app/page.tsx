@@ -25,37 +25,37 @@ export default function Home() {
     <>
     
     {/* HERO SECTION */}
-    <div className="bg-hero-pattern h-screen bg-no-repeat bg-cover">
+    <div className="bg-hero-pattern h-screen bg-no-repeat bg-cover pt-10">
     <div className="container mx-auto flex flex-col items-center">
         <div className="pt-16">
             <Image src="/logo.png" alt="logo" width={120} height={120} />
         </div>
-        <div className="text-center pt-10 md:pt-16 pb-10">
+        <div className="text-center pt-10 md:pt-16 pb-7">
             <h1 className="text-lg text-white font-semibold">Selamat Datang Di Portal Website Dinas Komunikasi dan Informatika</h1>
         </div>
         <div className="text-center">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-                <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="">
+                <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="/berita">
                     Berita
                 </a>
-                <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="">
+                <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="/magang">
                     Magang
                 </a>
-                <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="">
+                <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="/buku-tamu">
                     Buku Tamu
                 </a>
-                <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="">
+                <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="/pelatihan">
                     Pelatihan
                 </a>
-                <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="">
+                <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="/gallery">
                     Gallery
                 </a>
-                <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="">
+                <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="/agenda">
                     Agenda
                 </a>
             </div>
         </div>
-        <div className="md:pt-20 lg:pt-32 mt-10">
+        <div className="md:pt-20 lg:pt-32 pt-5 sm:pt-24">
             <button className="bg-blue-500 animate-bounce text-white rounded-full w-10 h-10 flex items-center justify-center">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -135,7 +135,7 @@ export default function Home() {
           </div>
       </div>
       <div className="pt-32 pb-10 px-20 text-center">
-              <a href="#_" className="relative inline-flex items-center px-12 py-3 overflow-hidden text-sm font-medium text-blue-600 border-2 border-blue-600 rounded-full hover:text-white group hover:bg-gray-50">
+              <a href="/berita" className="relative inline-flex items-center px-12 py-3 overflow-hidden text-sm font-medium text-blue-600 border-2 border-blue-600 rounded-full hover:text-white group hover:bg-gray-50">
         <span className="absolute left-0 block w-full h-0 transition-all bg-blue-600 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
         <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>

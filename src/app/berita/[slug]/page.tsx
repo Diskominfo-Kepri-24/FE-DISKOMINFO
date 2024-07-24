@@ -1,4 +1,4 @@
-import ShareButton from "./ShareButton";
+import ShareButton from "../../ShareButton";
 
 type DetailBeritaProps = {params: {slug: string[]}};
 
@@ -8,7 +8,7 @@ export default function BeritaDetail (props: DetailBeritaProps)
     const {params} = props;
     return(
         <>
-        <div className="bg-slate-50 ">
+        <div className="bg-slate-50 pt-[75px]">
         <div className="relative bg-[url('https://images.unsplash.com/photo-1719937050814-72892488f741?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center h-72">
             <div className="absolute inset-0 bg-black opacity-50"></div> 
             <div className="relative container mx-auto px-10 pt-5">
