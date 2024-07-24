@@ -168,7 +168,7 @@ export default function Navbar() {
           </Popover>
 
 
-          <a href="#" className="text-xs hover:bg-blue-50 px-4 py-2 rounded-md hover:text-blue-500 font-semibold leading-6 text-gray-500">
+          <a href="/kontak" className="text-xs hover:bg-blue-50 px-4 py-2 rounded-md hover:text-blue-500 font-semibold leading-6 text-gray-500">
             Kontak Kami
           </a>
         </PopoverGroup>

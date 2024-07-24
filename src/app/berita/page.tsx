@@ -22,20 +22,12 @@ export default function Berita () {
                         Home
                     </a>
                     </li>
-                    <li>
-                    <div className="flex items-center">
-                        <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                        </svg>
-                        <a href="#" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Berita</a>
-                    </div>
-                    </li>
                     <li aria-current="page">
                     <div className="flex items-center">
                         <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4"/>
                         </svg>
-                        <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Kategori Berita</span>
+                        <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Berita</span>
                     </div>
                     </li>
                 </ol>
@@ -65,156 +57,122 @@ export default function Berita () {
 
             {/* CONTENT CARD */}
             <div className="container mx-auto px-10 pb-12">
-                <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none md:grid-cols-3 lg:grid-cols-4">
-                    <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out rounded-2xl">
-                        
-                        <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="w-full rounded-2xl mx-auto mb-4"/>
-                        
-                        <div className="flex items-center gap-x-4 text-xs">
-                        <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
-                        <a href="#" className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</a>
-                        </div>
-                        <div className="group relative">
-                        <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                            <a href="#">
-                            <span className="absolute inset-0"></span>
-                            Boost your conversion rate
+                        <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg rounded-2xl transition-transform duration-300 hover:scale-105">
+                            <a href="/berita/1" className="block w-full transform transition-transform duration-300 cursor-pointer">
+                                <div className="w-full h-32 overflow-hidden rounded-2xl mb-4">
+                                    <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="object-cover w-full h-full rounded-2xl" />
+                                </div>
+                                <div className="flex items-center gap-x-4 text-xs">
+                                    <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
+                                    <span className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</span>
+                                </div>
+                                <h3 className="mt-4 text-lg font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap transition-all duration-300 hover:whitespace-normal hover:overflow-visible">
+                                    Boost your conversion rate lorem lorem loerm loerm loerm
+                                </h3>
                             </a>
-                        </h3>
-                        <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.</p>
-                        </div>
-                    </article>
-                    <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out rounded-2xl">
-                        
-                        <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="w-full rounded-2xl mx-auto mb-4"/>
-                        
-                        <div className="flex items-center gap-x-4 text-xs">
-                        <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
-                        <a href="#" className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</a>
-                        </div>
-                        <div className="group relative">
-                        <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                            <a href="#">
-                            <span className="absolute inset-0"></span>
-                            Boost your conversion rate
+                        </article>
+                        <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg rounded-2xl transition-transform duration-300 hover:scale-105">
+                            <a href="/berita/2" className="block w-full transform transition-transform duration-300 cursor-pointer">
+                                <div className="w-full h-32 overflow-hidden rounded-2xl mb-4">
+                                    <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="object-cover w-full h-full rounded-2xl" />
+                                </div>
+                                <div className="flex items-center gap-x-4 text-xs">
+                                    <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
+                                    <span className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</span>
+                                </div>
+                                <h3 className="mt-4 text-lg font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap transition-all duration-300 hover:whitespace-normal hover:overflow-visible">
+                                    Boost your conversion rate lorem lorem loerm loerm loerm
+                                </h3>
                             </a>
-                        </h3>
-                        <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.</p>
-                        </div>
-                    </article>
-                    <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out rounded-2xl">
-                        
-                        <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="w-full rounded-2xl mx-auto mb-4"/>
-                        
-                        <div className="flex items-center gap-x-4 text-xs">
-                        <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
-                        <a href="#" className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</a>
-                        </div>
-                        <div className="group relative">
-                        <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                            <a href="#">
-                            <span className="absolute inset-0"></span>
-                            Boost your conversion rate
+                        </article>
+                        <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg rounded-2xl transition-transform duration-300 hover:scale-105">
+                            <a href="#" className="block w-full transform transition-transform duration-300 cursor-pointer">
+                                <div className="w-full h-32 overflow-hidden rounded-2xl mb-4">
+                                    <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="object-cover w-full h-full rounded-2xl" />
+                                </div>
+                                <div className="flex items-center gap-x-4 text-xs">
+                                    <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
+                                    <span className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</span>
+                                </div>
+                                <h3 className="mt-4 text-lg font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap transition-all duration-300 hover:whitespace-normal hover:overflow-visible">
+                                    Boost your conversion rate lorem lorem loerm loerm loerm
+                                </h3>
                             </a>
-                        </h3>
-                        <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.</p>
-                        </div>
-                    </article>
-                    <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out rounded-2xl">
-                        
-                        <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="w-full rounded-2xl mx-auto mb-4"/>
-                        
-                        <div className="flex items-center gap-x-4 text-xs">
-                        <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
-                        <a href="#" className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</a>
-                        </div>
-                        <div className="group relative">
-                        <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                            <a href="#">
-                            <span className="absolute inset-0"></span>
-                            Boost your conversion rate
+                        </article>
+                        <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg rounded-2xl transition-transform duration-300 hover:scale-105">
+                            <a href="#" className="block w-full transform transition-transform duration-300 cursor-pointer">
+                                <div className="w-full h-32 overflow-hidden rounded-2xl mb-4">
+                                    <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="object-cover w-full h-full rounded-2xl" />
+                                </div>
+                                <div className="flex items-center gap-x-4 text-xs">
+                                    <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
+                                    <span className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</span>
+                                </div>
+                                <h3 className="mt-4 text-lg font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap transition-all duration-300 hover:whitespace-normal hover:overflow-visible">
+                                    Boost your conversion rate lorem lorem loerm loerm loerm
+                                </h3>
                             </a>
-                        </h3>
-                        <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.</p>
-                        </div>
-                    </article>
-                    <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out rounded-2xl">
-                        
-                        <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="w-full rounded-2xl mx-auto mb-4"/>
-                        
-                        <div className="flex items-center gap-x-4 text-xs">
-                        <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
-                        <a href="#" className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</a>
-                        </div>
-                        <div className="group relative">
-                        <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                            <a href="#">
-                            <span className="absolute inset-0"></span>
-                            Boost your conversion rate
+                        </article>
+                        <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg rounded-2xl transition-transform duration-300 hover:scale-105">
+                            <a href="#" className="block w-full transform transition-transform duration-300 cursor-pointer">
+                                <div className="w-full h-32 overflow-hidden rounded-2xl mb-4">
+                                    <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="object-cover w-full h-full rounded-2xl" />
+                                </div>
+                                <div className="flex items-center gap-x-4 text-xs">
+                                    <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
+                                    <span className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</span>
+                                </div>
+                                <h3 className="mt-4 text-lg font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap transition-all duration-300 hover:whitespace-normal hover:overflow-visible">
+                                    Boost your conversion rate lorem lorem loerm loerm loerm
+                                </h3>
                             </a>
-                        </h3>
-                        <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.</p>
-                        </div>
-                    </article>
-                    <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out rounded-2xl">
-                        
-                        <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="w-full rounded-2xl mx-auto mb-4"/>
-                        
-                        <div className="flex items-center gap-x-4 text-xs">
-                        <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
-                        <a href="#" className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</a>
-                        </div>
-                        <div className="group relative">
-                        <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                            <a href="#">
-                            <span className="absolute inset-0"></span>
-                            Boost your conversion rate
+                        </article>
+                        <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg rounded-2xl transition-transform duration-300 hover:scale-105">
+                            <a href="#" className="block w-full transform transition-transform duration-300 cursor-pointer">
+                                <div className="w-full h-32 overflow-hidden rounded-2xl mb-4">
+                                    <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="object-cover w-full h-full rounded-2xl" />
+                                </div>
+                                <div className="flex items-center gap-x-4 text-xs">
+                                    <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
+                                    <span className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</span>
+                                </div>
+                                <h3 className="mt-4 text-lg font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap transition-all duration-300 hover:whitespace-normal hover:overflow-visible">
+                                    Boost your conversion rate lorem lorem loerm loerm loerm
+                                </h3>
                             </a>
-                        </h3>
-                        <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.</p>
-                        </div>
-                    </article>
-                    <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out rounded-2xl">
-                        
-                        <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="w-full rounded-2xl mx-auto mb-4"/>
-                        
-                        <div className="flex items-center gap-x-4 text-xs">
-                        <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
-                        <a href="#" className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</a>
-                        </div>
-                        <div className="group relative">
-                        <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                            <a href="#">
-                            <span className="absolute inset-0"></span>
-                            Boost your conversion rate
+                        </article>
+                        <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg rounded-2xl transition-transform duration-300 hover:scale-105">
+                            <a href="#" className="block w-full transform transition-transform duration-300 cursor-pointer">
+                                <div className="w-full h-32 overflow-hidden rounded-2xl mb-4">
+                                    <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="object-cover w-full h-full rounded-2xl" />
+                                </div>
+                                <div className="flex items-center gap-x-4 text-xs">
+                                    <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
+                                    <span className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</span>
+                                </div>
+                                <h3 className="mt-4 text-lg font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap transition-all duration-300 hover:whitespace-normal hover:overflow-visible">
+                                    Boost your conversion rate lorem lorem loerm loerm loerm
+                                </h3>
                             </a>
-                        </h3>
-                        <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.</p>
-                        </div>
-                    </article>
-                    <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out rounded-2xl">
-                        
-                        <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="w-full rounded-2xl mx-auto mb-4"/>
-                        
-                        <div className="flex items-center gap-x-4 text-xs">
-                        <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
-                        <a href="#" className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</a>
-                        </div>
-                        <div className="group relative">
-                        <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                            <a href="#">
-                            <span className="absolute inset-0"></span>
-                            Boost your conversion rate
+                        </article>
+                        <article className="flex max-w-xl flex-col items-start justify-between bg-white p-6 shadow-lg rounded-2xl transition-transform duration-300 hover:scale-105">
+                            <a href="#" className="block w-full transform transition-transform duration-300 cursor-pointer">
+                                <div className="w-full h-32 overflow-hidden rounded-2xl mb-4">
+                                    <img src="https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Round Image" className="object-cover w-full h-full rounded-2xl" />
+                                </div>
+                                <div className="flex items-center gap-x-4 text-xs">
+                                    <time dateTime="2020-03-16" className="text-gray-500">Mar 16, 2020</time>
+                                    <span className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</span>
+                                </div>
+                                <h3 className="mt-4 text-lg font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap transition-all duration-300 hover:whitespace-normal hover:overflow-visible">
+                                    Boost your conversion rate lorem lorem loerm loerm loerm
+                                </h3>
                             </a>
-                        </h3>
-                        <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.</p>
-                        </div>
-                    </article>
-
+                        </article>
                     </div>
-                </div>
             </div>
+
             {/* Pagination */}
             <div className="flex flex-col items-center px-4 py-3 sm:px-6">
     <div className="flex flex-1 justify-center mb-4">
@@ -281,7 +239,7 @@ export default function Berita () {
             <span className="font-medium">97</span> results
         </p>
     </div>
-</div>
+            </div>
 
         </div>
     </>

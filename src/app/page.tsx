@@ -376,28 +376,6 @@ export default function Home() {
       <Agenda />
     </div>
 
-   
-{/* LOKASI */}
-  <div className="py-12 px-10">
-    <h1 className=" text-center font-semibold mb-10 text-3xl text-gray-800">Lokasi</h1>
-    <div className="flex justify-center">
-        <div className="w-full max-w-4xl h-[600px]">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63828.89157304007!2d104.40510237531363!3d0.918446285272658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d90d34974d79fb%3A0xaa3e6af4ffd3ce19!2sRiau%20Islands%20Province%20Communication%20and%20Information%20Office!5e0!3m2!1sen!2sid!4v1721288008146!5m2!1sen!2sid" 
-                width="800" 
-                height="600" 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full rounded-xl shadow-2xl"
-            ></iframe>
-        </div>
-    </div>
-</div>
-
-
-
-
-
     </>
   )
 }

@@ -18,7 +18,9 @@ export default function Footer () {
             </a>
             <div className="mt-6 lg:max-w-sm">
               <p className="text-sm font-semibold text-white">
-                Alamat : Pusat Pemerintahan Provinsi Kepulauan Riau Istana Kota Piring Gedung Sultan Mahmud Riayat Syah Gedung B2 Lantai III Pulau Dompak Tanjung Pinang
+                Alamat : Pusat Pemerintahan Provinsi Kepulauan Riau
+Istana Kota Piring Gedung Sultan Mahmud Riayat Syah, Dompak,
+Bukit Bestari, 29124 Tanjungpinang - Kepulauan Riau - Indonesia
               </p>
               <p className="mt-4 text-sm font-semibold text-white">
                 Email : kominfo@kepriprov.go.id 
