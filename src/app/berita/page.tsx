@@ -35,8 +35,9 @@ export default function Berita () {
             </div>
                 {/* TITLE SEARCH  */}
             <div className="container mx-auto px-5 sm:px-10 pt-5 pb-12">
+                <h1 className='text-2xl font-semibold text-gray-700'>Publikasi Artikel / Berita Terbaru</h1>
                 <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                    <h1 className="text-2xl font-semibold text-gray-700">Publikasi Artikel / Berita Terbaru</h1>
+                    <h1 className="text-sm font-normal text-gray-700">Dapatkan informasi mengenai berita terbaru dari Dinas Komunikasi dan Informatika Kepri </h1>
                     <form className="mt-4 md:mt-0 flex items-center space-x-2">
                     <input 
                         type="text" 

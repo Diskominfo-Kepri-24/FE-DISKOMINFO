@@ -30,14 +30,14 @@ const profil = [
   // { name: 'Moto & Lambang', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
 ]
 const program = [
-  { name: 'Buku Tamu', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
-  { name: 'Magang', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
-  { name: 'Pelatihan', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
+  { name: 'Buku Tamu', description: 'Speak directly to your customers', href: '/buku-tamu', icon: CursorArrowRaysIcon },
+  { name: 'Magang', description: 'Get a better understanding of your traffic', href: '/magang', icon: ChartPieIcon },
+  { name: 'Event', description: 'Your customers’ data will be safe and secure', href: '/event', icon: FingerPrintIcon },
 ]
 const publikasi = [
   { name: 'Berita', description: 'Get a better understanding of your traffic', href: '/berita', icon: ChartPieIcon },
   { name: 'Gallery', description: 'Speak directly to your customers', href: '/gallery', icon: CursorArrowRaysIcon },
-  { name: 'Agenda', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
+  { name: 'Agenda', description: 'Your customers’ data will be safe and secure', href: '/agenda', icon: FingerPrintIcon },
 ]
 
 
