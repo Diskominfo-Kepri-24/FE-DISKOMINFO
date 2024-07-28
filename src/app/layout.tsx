@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 import Footer from './Footer'
 
 const inter = Inter({ subsets: ['latin'] })
-const disableNavbar= ['/login', '/register','/buku-tamu'];
+const disableNavbar= ['/login', '/register','/buku-tamu', '/magang', '/magang/register'];
 export default function RootLayout({
   children,
 }: {

@@ -27,24 +27,24 @@ export default function BukuTamu() {
 
   return (
     <div className="bg-hero-pattern h-screen bg-no-repeat bg-cover flex justify-center items-center">
-      <div className="text-center">
+      <div className="text-center max-w-full px-4">
         {showFirst && (
-          <h1 className="font-bold text-2xl text-white mb-4 typing-demo break-text">
+          <h1 className="font-bold text-sm md:text-2xl text-white mb-4 typing-demo break-words overflow-hidden">
             Jika Anda Memiliki Keperluan 
           </h1>
         )}
         {showSecond && (
-          <h1 className="font-bold text-2xl text-white mb-4 typing-demo break-text">
+          <h1 className="font-bold text-sm md:text-2xl text-white mb-4 typing-demo break-words overflow-hidden">
             Pada Dinas Komunikasi dan Informatika Provinsi Kepulauan Riau
           </h1>
         )}
         {showThird && (
-          <h1 className="font-bold text-2xl text-white mb-4 typing-demo break-text">
+          <h1 className="font-bold text-sm md:text-2xl text-white mb-4 typing-demo break-words overflow-hidden">
             Silahkan Datang Langsung ke Kantor Untuk informasi lebih lanjut,
           </h1>
         )}
         {showFour && (
-          <h1 className="font-bold text-2xl text-white mb-10 typing-demo break-text">
+          <h1 className="font-bold text-sm md:text-2xl text-white mb-10 typing-demo break-words overflow-hidden">
             Melalui Alamat yang telah kami berikan di Kontak Kami
           </h1>
         )}
