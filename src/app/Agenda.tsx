@@ -1,3 +1,4 @@
+"use client"
 import { useState } from 'react';
 
 const Agenda = () => {
@@ -48,7 +49,10 @@ const Agenda = () => {
                 </svg>
               </div>
               <div className="ml-4">
+                <a href="/agenda/1">
                 <h3 className="text-sm font-bold hover:text-blue-500 text-slate-700">{event.title}</h3>
+
+                </a>
                 <p className="text-sm text-gray-400 mt-1">{event.date}, {event.time} <span className="ml-2 bg-gray-100 text-xs text-gray-500 font-semibold py-1 px-2 rounded-lg">{event.status}</span></p>
               </div>
             </div>
