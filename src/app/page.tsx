@@ -4,7 +4,12 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { CustomLeftArrow, CustomRightArrow } from './CustomArrow';
 import Agenda from "./Agenda";
-
+import { GrArticle } from "react-icons/gr";
+import { MdOutlineEventNote } from "react-icons/md";
+import { GrGallery } from "react-icons/gr";
+import { FaRegIdCard } from "react-icons/fa";
+import { BsFillMortarboardFill } from "react-icons/bs";
+import { BiFolderPlus } from "react-icons/bi";
 export default function Home() {
 
   const responsive = {
@@ -36,22 +41,25 @@ export default function Home() {
         <div className="text-center">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                 <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="/berita">
-                    Berita
+                <GrArticle className="text-xl mr-2" />  Berita
                 </a>
                 <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="/magang">
-                    Magang
+                <BsFillMortarboardFill className="text-xl mr-2" />
+                Magang
                 </a>
                 <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="/buku-tamu">
-                    Buku Tamu
+                <FaRegIdCard className="text-xl mr-2"/>Buku Tamu
                 </a>
                 <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="/event">
-                    Event
+                <MdOutlineEventNote className="text-xl mr-2" />
+                Event
                 </a>
                 <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="/gallery">
-                    Gallery
+                <GrGallery className="text-xl mr-2" />Gallery
                 </a>
                 <a className="group flex h-min items-center justify-center ring-none rounded-lg shadow-lg font-semibold py-3 px-6 bg-blue-500 border-b-blue-700 text-white border-b-4 hover:border-0 hover:text-gray-100 active:bg-blue-800 active:text-gray-300 text-sm sm:text-md dark:bg-gray-700 dark:border-gray-700 dark:border-b-gray-900" href="/agenda">
-                    Agenda
+                <BiFolderPlus className="text-xl mr-2" />
+                Agenda
                 </a>
             </div>
         </div>
