@@ -107,7 +107,7 @@ export default function RegisterMagang() {
             </div>
             <div className="mt-4 flex items-center justify-between">
               <span className="border-b w-1/5 md:w-1/4"></span>
-              <a href="/auth/login" className="text-xs text-white uppercase">Sign In</a>
+              <a href="/auth/login" className="text-xs text-blue-300 hover:text-blue-500 uppercase">Sign In</a>
               <span className="border-b w-1/5 md:w-1/4"></span>
             </div>
           </div>
