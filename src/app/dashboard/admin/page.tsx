@@ -3,6 +3,9 @@
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import ECommerce from "@/components/Dashboard/E-commerce";
+import DefaultLayout from "@/components/Layouts/DefaultLaout";
+import React from "react";
 
 const AdminDashboard = () => {
   const { data: session, status } = useSession();
@@ -31,16 +34,19 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div>
-      <h1>Admin Dashboard</h1>
-      <p>Welcome, {session.user.name}</p>
-      <button 
-        onClick={handleLogout} 
-        className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
-      >
-        Logout
-      </button>
-    </div>
+    <DefaultLayout>
+      <div>
+        <h1>Admin Dashboard</h1>
+        <p>Welcome, {session.user.name}</p>
+        <button 
+          onClick={handleLogout} 
+          className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
+        >
+          Logout
+        </button>
+        <ECommerce />
+      </div>
+    </DefaultLayout>
   );
 };
 

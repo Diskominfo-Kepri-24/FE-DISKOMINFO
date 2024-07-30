@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import LoginForm from '../../../../components/LoginForm'; // Sesuaikan path jika berbeda
 
 const LoginPage = () => {
@@ -15,6 +15,8 @@ const LoginPage = () => {
         router.push('/dashboard/admin');
       } else if (session.user.role === 'mahasiswa') {
         router.push('/dashboard/mahasiswa');
+      } else if (session.user.role === 'siswa') {
+        router.push('/dashboard/siswa');
       }
     }
   }, [status, session, router]);
