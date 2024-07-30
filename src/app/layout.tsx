@@ -8,7 +8,7 @@ import { SessionProvider } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
-const disableNavbar = ['/login', '/register', '/buku-tamu', '/magang', '/magang/register', '/magang/login', '/magang/register/otp', '/dashboard/mahasiswa', '/dashboard/admin'];
+const disableNavbar = ['/login', '/register', '/buku-tamu', '/magang', '/magang/register', '/magang/login', '/magang/register/otp', '/dashboard/mahasiswa', '/dashboard/admin', '/auth/login'];
 
 export default function RootLayout({
   children,

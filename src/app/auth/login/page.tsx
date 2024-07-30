@@ -1,9 +1,9 @@
-'use client'; // Pastikan ini adalah file klien
+'use client';
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import LoginForm from '../../../../components/LoginForm';
+import { useEffect, useState } from 'react';
+import LoginForm from '../../../../components/LoginForm'; // Sesuaikan path jika berbeda
 
 const LoginPage = () => {
   const { data: session, status } = useSession();
@@ -20,14 +20,31 @@ const LoginPage = () => {
   }, [status, session, router]);
 
   if (status === 'loading') {
-    return <p>Loading...</p>; // Tampilkan loading saat menunggu session
+    return <p>Loading...</p>;
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4">Login</h1>
-        <LoginForm />
+    <div className="h-screen bg-no-repeat bg-cover bg-hero-pattern">
+      <div className="flex flex-col md:flex-row text-center items-center md:text-start md:items-start p-4">
+        <img src="/logo.png" alt="Logo" className="w-[100px] mb-4 text-center" />
+        <div className="flex flex-col ml-4 mt-4">
+          <h2 className="text-xl font-bold text-white">
+            Selamat Datang di Website Login Magang
+          </h2>
+          <h3 className="text-lg font-bold text-blue-300">
+            Dinas Komunikasi dan Informatika Kepulauan Riau
+          </h3>
+        </div>
+      </div>
+      <div className="container mx-auto p-4">
+        <div className="max-w-md mx-auto shadow-lg rounded-lg bg-white bg-opacity-30 backdrop-blur-md">
+          <div className="p-6">
+            <h2 className="text-center text-2xl font-bold mb-4 text-white">
+              Login
+            </h2>
+            <LoginForm />
+          </div>
+        </div>
       </div>
     </div>
   );
