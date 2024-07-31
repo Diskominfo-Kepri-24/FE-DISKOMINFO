@@ -44,7 +44,7 @@ const AdminDashboard = () => {
         >
           Logout
         </button>
-        <ECommerce />
+        {/* <ECommerce /> */}
       </div>
     </DefaultLayout>
   );

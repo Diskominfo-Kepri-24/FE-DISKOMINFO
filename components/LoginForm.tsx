@@ -43,7 +43,7 @@ const LoginForm = () => {
           placeholder="Password"
         />
       </div>
-      {error && <p className="text-red-500 text-center">{error}</p>}
+      {error && <p className=" text-center text-white">{error}</p>}
       <div className="text-center">
         <button
           type="submit"

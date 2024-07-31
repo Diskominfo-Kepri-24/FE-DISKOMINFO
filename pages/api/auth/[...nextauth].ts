@@ -12,13 +12,13 @@ export default NextAuth({
       },
       authorize: async (credentials) => {
         try {
-          const res = await axios.post('http://127.0.0.1:8000/api/v1/login', {
+          const res = await axios.post(`${process.env.NEXT_PUBLIC_LINK_API}/login`, {
             email: credentials?.email,
             password: credentials?.password,
           });
-          
+
           const user = res.data;
-          
+
           if (user) {
             return user;
           } else {
@@ -34,13 +34,13 @@ export default NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = user.role as string; // Casting untuk memastikan tipe yang benar
+        token.role = user.role as string;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
-        session.user.role = token.role as string; // Casting untuk memastikan tipe yang benar
+        session.user.role = token.role as string
       }
       return session;
     },
@@ -48,4 +48,5 @@ export default NextAuth({
   pages: {
     signIn: '/auth/login',
   },
+  secret: process.env.NEXTAUTH_SECRET, // Ensure this line is added
 });
