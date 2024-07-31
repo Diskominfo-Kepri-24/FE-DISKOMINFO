@@ -14,7 +14,14 @@ import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
 
 const inter = Inter({ subsets: ['latin'] });
-const disableNavbar = ['/login', '/register', '/buku-tamu', '/magang', '/magang/register', '/magang/login', '/magang/register/otp', '/dashboard/mahasiswa', '/dashboard/siswa', '/dashboard/admin', '/auth/login'];
+
+// Daftar URL statis untuk dinonaktifkan navbar
+const disableNavbar = [
+  '/login', '/register', '/buku-tamu', '/magang', 
+  '/magang/register', '/magang/login', '/magang/register/otp',
+  '/dashboard/mahasiswa', '/dashboard/siswa', '/dashboard/admin', 
+  '/auth/login'
+];
 
 export default function RootLayout({
   children,
@@ -29,18 +36,21 @@ export default function RootLayout({
     setTimeout(() => setLoading(false), 1000);
   }, []);
 
+  // Cek apakah pathname ada dalam daftar atau mengandung '/dashboard'
+  const isNavbarDisabled = disableNavbar.includes(pathname) || pathname.includes('/dashboard');
+
   return (
     <html lang="en">
       <body className={`bg-slate-50 ${inter.className}`} suppressHydrationWarning={true}>
         <SessionProvider>
           {
-            !disableNavbar.includes(pathname) && !loading && <Navbar />
+            !isNavbarDisabled && !loading && <Navbar />
           }
 
           {loading ? <Loader /> : children}
 
           {
-            !disableNavbar.includes(pathname) && !loading && <Footer />
+            !isNavbarDisabled && !loading && <Footer />
           }
         </SessionProvider>
       </body>

@@ -1,22 +1,20 @@
-'use client'; // Pastikan ini adalah file klien
+'use client';
 
-import { useSession, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import ECommerce from "@/components/Dashboard/E-commerce";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import React from "react";
-import WelcomeCard from '../../../../components/WelcomeCard';
+import ProfileBox from '@/components/ProfileBox';
 
-const AdminDashboard = () => {
+
+const Profile = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (status === 'loading') {
-      return; // Tampilkan loading saat menunggu status sesi
-    }
-    if (!session || session.user.role !== 'admin') {
+    if (status === 'loading') return; // Tampilkan loading saat menunggu status sesi
+    if (!session || session.user.role !== 'mahasiswa') {
       router.push('/auth/login'); // Redirect ke login jika akses ditolak
     }
   }, [session, status, router]);
@@ -29,7 +27,7 @@ const AdminDashboard = () => {
     ); // Tampilkan loading saat menunggu status sesi
   }
 
-  if (!session || session.user.role !== 'admin') {
+  if (!session || session.user.role !== 'mahasiswa') {
     return (
       <div className="flex items-center justify-center h-screen">
         <p>Access Denied</p>
@@ -39,9 +37,10 @@ const AdminDashboard = () => {
 
   return (
     <DefaultLayout>
-      <WelcomeCard role={session.user.role}/>
+          <h1 className='text-xl font-bold text-black dark:text-white'>Profile</h1>
+          <ProfileBox />
     </DefaultLayout>
   );
 };
 
-export default AdminDashboard;
+export default Profile;

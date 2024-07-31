@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import React from "react";
+import WelcomeCard from '../../../../components/WelcomeCard';
 
 const SiswaDashboard = () => {
   const { data: session, status } = useSession();
@@ -20,19 +21,24 @@ const SiswaDashboard = () => {
   }, [session, status, router]);
 
   if (status === 'loading') {
-    return <p>Loading...</p>; // Tampilkan loading saat menunggu status sesi
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p>Loading...</p>
+      </div>
+    ); // Tampilkan loading saat menunggu status sesi
   }
 
   if (!session || session.user.role !== 'siswa') {
-    return <p>Access Denied</p>; // Tampilkan pesan jika akses ditolak
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p>Access Denied</p>
+      </div>
+    ); // Tampilkan pesan jika akses ditolak
   }
 
   return (
     <DefaultLayout>
-      <div>
-        <h1>Siswa Dashboard</h1>
-        <p>Welcome, {session.user.name}</p>
-      </div>
+      <WelcomeCard role={session.user.role}/>
     </DefaultLayout>
   );
 };
