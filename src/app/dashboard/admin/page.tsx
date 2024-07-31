@@ -20,10 +20,6 @@ const AdminDashboard = () => {
     }
   }, [session, status, router]);
 
-  const handleLogout = async () => {
-    await signOut({ redirect: false }); // Nonaktifkan redirect otomatis
-    router.push('/auth/login'); // Arahkan ke halaman login setelah logout
-  };
 
   if (status === 'loading') {
     return <p>Loading...</p>; // Tampilkan loading saat menunggu status sesi
@@ -38,13 +34,6 @@ const AdminDashboard = () => {
       <div>
         <h1>Admin Dashboard</h1>
         <p>Welcome, {session.user.name}</p>
-        <button 
-          onClick={handleLogout} 
-          className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
-        >
-          Logout
-        </button>
-        {/* <ECommerce /> */}
       </div>
     </DefaultLayout>
   );
