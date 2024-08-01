@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import React from "react";
+import TableGallery from '@/components/Tables/TableGallery';
 
 const Gallery = () => {
   const { data: session, status } = useSession();
@@ -35,7 +36,7 @@ const Gallery = () => {
 
   return (
     <DefaultLayout>
-        <h1>Halaman Gallery</h1>
+        <TableGallery/>
     </DefaultLayout>
   );
 };

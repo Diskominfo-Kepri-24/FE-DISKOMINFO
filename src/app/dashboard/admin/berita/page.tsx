@@ -36,7 +36,7 @@ const Berita = () => {
 
   return (
     <DefaultLayout>
-        <h1 className='text-xl font-bold text-black dark:text-white'>Berita</h1>
+        
         <TableBerita/>
     </DefaultLayout>
   );

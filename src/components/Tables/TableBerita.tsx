@@ -118,7 +118,7 @@ const TableBerita = () => {
                   }`}
                 >
                   <div className="flex items-center justify-end space-x-3.5">
-                    <button onClick={handleUpdate} className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
+                    <button   onClick={() => handleUpdate(`judul-${index + 1}`)} className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
                       Edit
                     </button>
                     <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">

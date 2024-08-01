@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import React from "react";
+import TableAgenda from '@/components/Tables/TableAgenda';
 
 const Agenda = () => {
   const { data: session, status } = useSession();
@@ -35,7 +36,7 @@ const Agenda = () => {
 
   return (
     <DefaultLayout>
-        <h1>Halaman Agenda</h1>
+        <TableAgenda/>
     </DefaultLayout>
   );
 };
