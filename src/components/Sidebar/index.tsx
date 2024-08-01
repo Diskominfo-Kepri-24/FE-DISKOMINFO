@@ -146,11 +146,11 @@ const menuGroups: MenuGroups = {
   ],
 };
 
-const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
+const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => { 
   const pathname = usePathname();
   const { data: session } = useSession();
   const [pageName, setPageName] = useLocalStorage("selectedMenu", "dashboard");
-  const [role, setRole] = useState<keyof MenuGroups>("admin");
+  const [role, setRole] = useState<keyof MenuGroups>("siswa");
 
   useEffect(() => {
     if (session) {

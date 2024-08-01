@@ -20,6 +20,7 @@ const DropdownUser = () => {
 
   const handleLogout = async () => {
     await signOut({ redirect: false }); // Nonaktifkan redirect otomatis
+    localStorage.removeItem("selectedMenu");
     router.push('/auth/login'); // Arahkan ke halaman login setelah logout
   };
 
