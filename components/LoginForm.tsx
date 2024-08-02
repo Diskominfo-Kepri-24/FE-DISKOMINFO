@@ -19,7 +19,13 @@ const LoginForm = () => {
     });
 
     if (res?.error) {
-      setError('Invalid credentials');
+      if (res.status === 400) {
+        setError('Kesalahan input. Mohon cek kembali email atau password Anda.');
+      } else if (res.status === 500) {
+        setError('Terjadi kesalahan pada server. Mohon coba lagi nanti.');
+      } else {
+        setError('Email atau Password Anda Salah');
+      }
     } else if (res?.ok && res.url) {
       window.location.replace(res.url);
     }
@@ -48,7 +54,7 @@ const LoginForm = () => {
           disabled={isProcessing}
         />
       </div>
-      {error && <p className=" text-center text-white">{error}</p>}
+      {error && <p className=" mb-4 text-center text-white">{error}</p>}
       <div className="text-center">
         <button
           type="submit"
