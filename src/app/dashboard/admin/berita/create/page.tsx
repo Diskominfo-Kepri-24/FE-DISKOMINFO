@@ -5,7 +5,7 @@ import axios from 'axios';
 import DefaultLayout from '@/components/Layouts/DefaultLaout';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useSession } from 'next-auth/react'; // Pastikan ini diimpor
+import { useSession } from 'next-auth/react';
 
 const CreateBerita = () => {
   const [slug, setSlug] = useState('');
@@ -52,7 +52,7 @@ const CreateBerita = () => {
       
     } catch (error) {
       console.error('Error submitting form:', error);
-      // Show error notification
+
       toast.error('Gagal menambahkan berita. Silakan coba lagi.');
     } finally {
       setIsLoading(false);
