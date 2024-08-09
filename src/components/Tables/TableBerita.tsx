@@ -1,46 +1,95 @@
-import { Package } from "@/types/package";
+import axios from "axios";
+import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const packageData: Package[] = [
-  {
-    name: "Free package",
-    price: 0.0,
-    invoiceDate: `Jan 13, 2023`,
-    status: "Selesai",
-  },
-  {
-    name: "Standard Package",
-    price: 59.0,
-    invoiceDate: `Jan 13, 2023`,
-    status: "Selesai",
-  },
-  {
-    name: "Business Package",
-    price: 99.0,
-    invoiceDate: `Jan 13, 2023`,
-    status: "Belum",
-  },
-  {
-    name: "Standard Package",
-    price: 59.0,
-    invoiceDate: `Jan 13, 2023`,
-    status: "Pending",
-  },
-];
+interface Berita {
+  slug: string,
+  judul: string,
+  isi_berita: string,
+  kategori: string,
+  gambar: string
+}
 
 const TableBerita = () => {
+  const [dataBerita, setDataBerita] = useState<Berita[]>([]);
+  const [loading, setLoading] = useState<string | null>(null);
   const router = useRouter();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    const fetchDataBerita = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:8000/api/v1/berita`);
+        setDataBerita(response.data.data.data);
+      } catch (error) {
+        console.error(`Error fetching berita list`, error);
+      }
+    }
+    fetchDataBerita();
+  }, []);
 
   const handleCreate = () => {
     router.push("/dashboard/admin/berita/create");
   };
 
   const handleUpdate = (slug: string) => {
-    router.push(`/dashboard/admin/berita/update/judul-1`);
+    router.push(`/dashboard/admin/berita/update/${slug}`);
+  };
+
+  const handleDelete = async (slug: string) => {
+    if (session?.accessToken) {
+      setLoading(slug); // Set loading state for the specific slug
+      try {
+        await axios.delete(`http://127.0.0.1:8000/api/v1/berita/${slug}`, {
+          headers: {
+            Authorization: `Bearer ${session.accessToken}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        toast.success('Berita berhasil dihapus!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      } catch (error) {
+        toast.error('Gagal menghapus berita!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } finally {
+        setLoading(null); // Reset loading state
+      }
+    } else {
+      toast.error('Session tidak ditemukan!', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   return (
     <div>
+      <ToastContainer />
       <button
         onClick={handleCreate}
         className="mb-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
@@ -76,59 +125,80 @@ const TableBerita = () => {
               </tr>
             </thead>
             <tbody>
-            {packageData.map((packageItem, index) => (
-              <tr key={index}>
-                <td
-                  className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
-                    index === packageData.length - 1 ? "border-b-0" : "border-b"
-                  }`}
-                >
-                  {index + 1}
-                </td>
-                <td
-                  className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
-                    index === packageData.length - 1 ? "border-b-0" : "border-b"
-                  }`}
-                >
-                  <h5 className="text-dark dark:text-white">Slug Dummy {index + 1}</h5>
-                </td>
-                <td
-                  className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageData.length - 1 ? "border-b-0" : "border-b"}`}
-                >
-                  <p className="text-dark dark:text-white">Judul Berita Dummy {index + 1}</p>
-                </td>
-                <td
-                  className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageData.length - 1 ? "border-b-0" : "border-b"}`}
-                >
-                  <p className="text-dark dark:text-white">Isi Berita Dummy {index + 1}</p>
-                </td>
-                <td
-                  className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageData.length - 1 ? "border-b-0" : "border-b"}`}
-                >
-                  <p className="text-dark dark:text-white">Kategori Dummy {index + 1}</p>
-                </td>
-                <td
-                  className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageData.length - 1 ? "border-b-0" : "border-b"}`}
-                >
-                  <img src={`https://via.placeholder.com/50`} alt={`Gambar Dummy ${index + 1}`} className="w-10 h-10 object-cover" />
-                </td>
-                <td
-                  className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${
-                    index === packageData.length - 1 ? "border-b-0" : "border-b"
-                  }`}
-                >
-                  <div className="flex items-center justify-end space-x-3.5">
-                    <button   onClick={() => handleUpdate(`judul-${index + 1}`)} className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
-                      Edit
-                    </button>
-                    <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
-                      Hapus
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+              {dataBerita.map((item, index) => (
+                <tr key={index}>
+                  <td
+                    className={`border-[#eee] max-w-xs px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
+                      index === dataBerita.length - 1 ? "border-b-0" : "border-b"
+                    }`}
+                  >
+                    {index + 1}
+                  </td>
+                  <td
+                    className={`border-[#eee] px-4 py-4 max-w-xs dark:border-dark-3 xl:pl-7.5 ${
+                      index === dataBerita.length - 1 ? "border-b-0" : "border-b"
+                    }`}
+                  >
+                    <h5 className="text-dark dark:text-white">{item.slug}</h5>
+                  </td>
+                  <td
+                    className={`border-[#eee] px-4 py-4 max-w-xs dark:border-dark-3 ${
+                      index === dataBerita.length - 1 ? "border-b-0" : "border-b"
+                    }`}
+                  >
+                    <p className="text-dark dark:text-white">{item.judul}</p>
+                  </td>
+                  <td
+                    className={`border-[#eee] px-4 py-4 break-words max-w-lg dark:border-dark-3 ${
+                      index === dataBerita.length - 1 ? "border-b-0" : "border-b"
+                    }`}
+                  >
+                    <p className="text-dark dark:text-white ">{item.isi_berita}</p>
+                  </td>
+                  <td
+                    className={`border-[#eee] px-4 py-4  dark:border-dark-3 ${
+                      index === dataBerita.length - 1 ? "border-b-0" : "border-b"
+                    }`}
+                  >
+                    <p className="text-dark dark:text-white">{item.kategori}</p>
+                  </td>
+                  <td
+                    className={`border-[#eee] px-4 py-4  dark:border-dark-3 ${
+                      index === dataBerita.length - 1 ? "border-b-0" : "border-b"
+                    }`}
+                  >
+                    <img
+                      src={`http://127.0.0.1:8000/${item.gambar}`}
+                      alt={`Gambar Berita ${item.judul}`}
+                      className="w-full h-25 object-fit"
+                    />
+                  </td>
+                  <td
+                    className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${
+                      index === dataBerita.length - 1 ? "border-b-0" : "border-b"
+                    }`}
+                  >
+                    <div className="flex items-center justify-end space-x-3.5">
+                      <button
+                        onClick={() => handleUpdate(item.slug)}
+                        className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(item.slug)}
+                        className={`bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 ${
+                          loading === item.slug ? "cursor-not-allowed" : ""
+                        }`}
+                        disabled={loading === item.slug}
+                      >
+                        {loading === item.slug ? "Loading..." : "Hapus"}
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>

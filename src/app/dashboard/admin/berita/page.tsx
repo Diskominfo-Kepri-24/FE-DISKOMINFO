@@ -12,9 +12,9 @@ const Berita = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (status === 'loading') return; // Tampilkan loading saat menunggu status sesi
+    if (status === 'loading') return; 
     if (!session || session.user.role !== 'admin') {
-      router.push('/auth/login'); // Redirect ke login jika akses ditolak
+      router.push('/auth/login'); 
     }
   }, [session, status, router]);
 
@@ -23,7 +23,7 @@ const Berita = () => {
       <div className="flex items-center justify-center h-screen">
         <p>Loading...</p>
       </div>
-    ); // Tampilkan loading saat menunggu status sesi
+    ); 
   }
 
   if (!session || session.user.role !== 'admin') {
@@ -31,7 +31,7 @@ const Berita = () => {
       <div className="flex items-center justify-center h-screen">
         <p>Access Denied</p>
       </div>
-    ); // Tampilkan pesan jika akses ditolak
+    ); 
   }
 
   return (

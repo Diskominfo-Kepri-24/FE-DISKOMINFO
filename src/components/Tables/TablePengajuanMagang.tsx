@@ -1,33 +1,42 @@
 import { Package } from "@/types/package";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
-const packageData: Package[] = [
-  {
-    name: "Free package",
-    price: 0.0,
-    invoiceDate: `Jan 13, 2023`,
-    status: "Paid",
-  },
-  {
-    name: "Standard Package",
-    price: 59.0,
-    invoiceDate: `Jan 13, 2023`,
-    status: "Paid",
-  },
-  {
-    name: "Business Package",
-    price: 99.0,
-    invoiceDate: `Jan 13, 2023`,
-    status: "Unpaid",
-  },
-  {
-    name: "Standard Package",
-    price: 59.0,
-    invoiceDate: `Jan 13, 2023`,
-    status: "Pending",
-  },
-];
+
 
 const TablePengajuanMagang = () => {
+  const { data: session } = useSession();
+  const [packages, setPackages] = useState<Package[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  // if (session) {
+  //   console.log('Access Token:', session.accessToken);
+  //   console.log('User ID:', session.user.userId);
+  //   console.log('Email:', session.user.email);
+  //   console.log('Nama:', session.user.name);
+  //   console.log('Role:', session.user.role);
+  // }
+  // console.log(packages);
+  useEffect(() => {
+    if (session && session.accessToken) {
+      const fetchPackages = async () => {
+        try {
+          const response = await axios.get('http://127.0.0.1:8000/api/v1/user-magang', {
+            headers: {
+              Authorization: `Bearer ${session.accessToken}`,
+            },
+          });
+          setPackages(response.data.users);
+        } catch (error) {
+          console.error('Failed to fetch packages:', error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchPackages();
+    }
+  }, [session]);
   return (
     <div className="rounded-[10px] border mt-4 border-stroke bg-white p-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card sm:p-7.5">
       <div className="max-w-full overflow-x-auto">
@@ -49,25 +58,25 @@ const TablePengajuanMagang = () => {
             </tr>
           </thead>
           <tbody>
-            {packageData.map((packageItem, index) => (
+            {packages.map((item, index) => (
               <tr key={index}>
                 <td
                   className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
-                    index === packageData.length - 1 ? "border-b-0" : "border-b"
+                    index === packages.length - 1 ? "border-b-0" : "border-b"
                   }`}
                 >
                   {index + 1}
                 </td>
                 <td
                   className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
-                    index === packageData.length - 1 ? "border-b-0" : "border-b"
+                    index === packages.length - 1 ? "border-b-0" : "border-b"
                   }`}
                 >
-                  <h5 className="text-dark dark:text-white">Nama Dummy {index + 1}</h5>
+                  <h5 className="text-dark dark:text-white">{item.nama}</h5>
                 </td>
                 <td
                   className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${
-                    index === packageData.length - 1 ? "border-b-0" : "border-b"
+                    index === packages.length - 1 ? "border-b-0" : "border-b"
                   }`}
                 >
                   <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
@@ -76,7 +85,7 @@ const TablePengajuanMagang = () => {
                 </td>
                 <td
                   className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${
-                    index === packageData.length - 1 ? "border-b-0" : "border-b"
+                    index === packages.length - 1 ? "border-b-0" : "border-b"
                   }`}
                 >
                   <div className="flex items-center justify-end space-x-3.5">

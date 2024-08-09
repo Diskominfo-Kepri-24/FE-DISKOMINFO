@@ -1,13 +1,22 @@
 // types/next-auth.d.ts
 import NextAuth from 'next-auth';
-import { DefaultUser } from 'next-auth';
 
 declare module 'next-auth' {
   interface User {
-    role: string;  // Tambahkan properti role di sini
+    accessToken: string;
+    userId: string;
+    email: string;
+    name: string;
+    role: string;
   }
 
   interface Session {
-    user: User;
+    accessToken: string;
+    user: {
+      userId: string;
+      email: string;
+      name: string;
+      role: string;
+    };
   }
 }
