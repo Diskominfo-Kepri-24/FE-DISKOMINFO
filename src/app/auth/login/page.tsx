@@ -22,7 +22,11 @@ const LoginPage = () => {
   }, [status, session, router]);
 
   if (status === 'loading') {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p>Loading...</p>
+      </div>
+    ); 
   }
 
   return (
