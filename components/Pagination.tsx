@@ -40,7 +40,7 @@ export default function Pagination({
               key={index}
               onClick={() => handlePageChange(index + 1)}
               className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold 
-                ${currentPage === index + 1 ? 'bg-indigo-600 text-white' : 'text-gray-900'} 
+                ${currentPage === index + 1 ? 'bg-indigo-600 text-white' : 'text-gray-100'} 
                 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
             >
               {index + 1}
@@ -57,7 +57,7 @@ export default function Pagination({
         </nav>
       </div>
       <div className="text-center">
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-gray-700 dark:text-gray-100">
           Showing <span className="font-medium">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
           <span className="font-medium">{Math.min(currentPage * itemsPerPage, totalItems)}</span> of{' '}
           <span className="font-medium">{totalItems}</span> results
