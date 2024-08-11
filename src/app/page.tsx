@@ -10,7 +10,40 @@ import { GrGallery } from "react-icons/gr";
 import { FaRegIdCard } from "react-icons/fa";
 import { BsFillMortarboardFill } from "react-icons/bs";
 import { BiFolderPlus } from "react-icons/bi";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+interface Berita {
+  id: string;
+  slug: string;
+  gambar: string;
+  tanggal: string;
+  kategori: string;
+  judul: string;
+}
 export default function Home() {
+
+  
+  const [dataBerita, setDataBerita] = useState<Berita[]>([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/berita`);
+      setDataBerita(response.data.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const beritaTerkini = dataBerita.length > 0 ? dataBerita[0] : null;
+  const beritaTerbaru = dataBerita.length > 1 ? dataBerita.slice(1, 4) : [];
+  // console.log(dataBerita);
+  // console.log(beritaTerkini);
+  // console.log(beritaTerbaru);
 
   const responsive = {
     desktop: {
@@ -81,68 +114,60 @@ export default function Home() {
               <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">Temukan Berita Terbaru Dari OPD Provinsi Kepulauan Riau</p>
           </div>
           <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-2 xl:gap-16">
-              <article className="flex flex-col md:items-center lg:items-start gap-4 md:flex-row lg:flex-col lg:gap-6">
-                  <a href="#" className="group relative block h-56 w-full shrink-0 self-start overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-24 md:w-24 lg:h-full lg:w-full">
-                      <img src="https://images.unsplash.com/photo-1476362555312-ab9e108a0b7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" loading="lazy" alt="" className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+          {beritaTerkini &&(
+            <article className="flex flex-col md:items-center lg:items-start gap-4 md:flex-row lg:flex-col lg:gap-6">
+                  <a href={`/berita/${beritaTerkini.slug}`} className="group relative block h-56 w-full shrink-0 self-start overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-24 md:w-24 lg:h-full lg:w-full">
+                      <img src={`http://127.0.0.1:8000/${beritaTerkini.gambar}`} loading="lazy" alt="" className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
                   </a>
                   <div> 
                       <h2 className="text-xl font-bold text-gray-800">
-                          <a href="#" className="transition duration-100 hover:text-blue-500 active:text-blue-600">The Pines and the Mountains</a>
+                          <a  href={`/berita/${beritaTerkini.slug}`}  className="transition duration-100 hover:text-blue-500 active:text-blue-600">{beritaTerkini.judul}</a>
                       </h2>
                       
-                      <span className="text-sm text-gray-400 mr-5">April 2, 2022</span>
-                      <a  href="" className="text-sm text-gray-700 px-4 rounded-xl text-center bg-slate-50 hover:bg-slate-100">Marketing</a>
+                      <span className="text-sm  mr-5"><time dateTime={beritaTerkini.tanggal} className="text-gray-500">
+                      {new Date(beritaTerkini.tanggal).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                      })}
+                    </time></span>
+                      <span   className="text-sm text-gray-700 px-4 rounded-xl text-center bg-slate-50 hover:bg-slate-100"> {beritaTerkini.kategori}</span>
 
                   </div>
               </article>
+          )}
+              
               <div className="grid gap-8">
-                  <article className="flex flex-col items-center gap-4 md:flex-row lg:gap-6">
-                      <a href="#" className="group relative block h-56 w-full shrink-0 self-start overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-24 md:w-24 lg:h-24 lg:w-24">
-                          <img src="https://images.unsplash.com/photo-1511376777868-611b54f68947?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" loading="lazy" alt="" className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
-                      </a>
-                      <div className="flex flex-col gap-2">
-                          <h2 className="text-md font-bold text-gray-800">
-                              <a href="#" className="transition duration-100 hover:text-blue-500 active:text-blue-600">Kunker Hari Kedua Ansar ke Lingga Diakhiri di Penaah, Serahkan Bantuan Rp1,12 Miliar</a>
-                          </h2>
-                          <div className="flex gap-4 ">
-                            <span className="text-sm text-gray-400">April 2, 2022</span>
-                            <a  href="" className="text-sm text-gray-700 px-4 rounded-xl text-center  bg-slate-50 hover:bg-slate-100">Marketing</a>
-                          </div>
-                      </div>
-                  </article>
-                  <article className="flex flex-col items-center gap-4 md:flex-row lg:gap-6">
-                      <a href="#" className="group relative block h-56 w-full shrink-0 self-start overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-24 md:w-24 lg:h-24 lg:w-24">
-                          <img src="https://images.unsplash.com/photo-1511376777868-611b54f68947?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" loading="lazy" alt="" className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
-                      </a>
-                      <div className="flex flex-col gap-2">
-                          <h2 className="text-md font-bold text-gray-800">
-                              <a href="#" className="transition duration-100 hover:text-blue-500 active:text-blue-600">Kunker Hari Kedua Ansar ke Lingga Diakhiri di Penaah, Serahkan Bantuan Rp1,12 Miliar</a>
-                          </h2>
-                          <div className="flex gap-4 ">
-                            <span className="text-sm text-gray-400">April 2, 2022</span>
-                            <a  href="" className="text-sm text-gray-700 px-4 rounded-xl text-center bg-slate-50 hover:bg-slate-100">Marketing</a>
-                          </div>
-                      </div>
-                  </article>
-                  <article className="flex flex-col items-center gap-4 md:flex-row lg:gap-6">
-                      <a href="#" className="group relative block h-56 w-full shrink-0 self-start overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-24 md:w-24 lg:h-24 lg:w-24">
-                          <img src="https://images.unsplash.com/photo-1511376777868-611b54f68947?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" loading="lazy" alt="" className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
-                      </a>
-                      <div className="flex flex-col gap-2">
-                          <h2 className="text-md font-bold text-gray-800">
-                              <a href="#" className="transition duration-100 hover:text-blue-500 active:text-blue-600">Kunker Hari Kedua Ansar ke Lingga Diakhiri di Penaah, Serahkan Bantuan Rp1,12 Miliar</a>
-                          </h2>
-                          <div className="flex gap-4 ">
-                            <span className="text-sm text-gray-400">April 2, 2022</span>
-                            <a  href="" className="text-sm text-gray-700 px-4 rounded-xl text-center bg-slate-50  hover:bg-slate-100">Marketing</a>
-                          </div>
-                      </div>
-                  </article>
+                {beritaTerbaru.map((item)=>
+                <article key={item.id} className="flex flex-col items-center gap-4 md:flex-row lg:gap-6">
+                <a  href={`/berita/${item.slug}`}className="group relative block h-56 w-full shrink-0 self-start overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-24 md:w-24 lg:h-24 lg:w-24">
+                    <img src={`http://127.0.0.1:8000/${item.gambar}`} loading="lazy" alt="" className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                </a>
+                <div className="flex flex-col gap-2">
+                    <h2 className="text-md font-bold text-gray-800">
+                        <a href={`/berita/${item.slug}`} className="transition duration-100 hover:text-blue-500 active:text-blue-600">{item.judul}</a>
+                    </h2>
+                    <div className="flex gap-4 ">
+                      <span className="text-sm text-gray-400"><time dateTime={item.tanggal} className="text-gray-500">
+                      {new Date(item.tanggal).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                      })}
+                    </time></span>
+                    <span   className="text-sm text-gray-700 px-4 rounded-xl text-center bg-slate-50 hover:bg-slate-100"> {item.kategori}</span>
+                    </div>
+                </div>
+            </article>
+                
+                )}
+                  
+               
 
               </div>
           </div>
       </div>
-      <div className="pt-32 pb-10 px-20 text-center">
+      <div className="pt-32 lg:pt-40 pb-10 px-20 text-center">
               <a href="/berita" className="relative inline-flex items-center px-12 py-3 overflow-hidden text-sm font-medium text-blue-600 border-2 border-blue-600 rounded-full hover:text-white group hover:bg-gray-50">
         <span className="absolute left-0 block w-full h-0 transition-all bg-blue-600 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
         <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">

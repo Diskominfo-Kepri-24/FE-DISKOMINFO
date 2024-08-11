@@ -21,6 +21,7 @@ export default function Berita() {
   const fetchData = async () => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/berita`);
+      // console.log(response.data.data.data);
       setDataBerita(response.data.data.data);
     } catch (error) {
       console.error(error);

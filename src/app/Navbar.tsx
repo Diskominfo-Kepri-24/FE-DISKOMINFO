@@ -209,7 +209,7 @@ export default function Navbar() {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                  <a
-                  href="#"
+                  href="/"
                   className="-mx-3 block rounded-lg px-3 py-2 text-xs font-semibold leading-7 text-gray-500 hover:bg-blue-50  hover:text-blue-500"
                 >
                   Beranda
@@ -270,7 +270,7 @@ export default function Navbar() {
                 </Disclosure>
                
                 <a
-                  href="#"
+                  href="/kontak"
                   className="-mx-3 block rounded-lg px-3 py-2 text-xs font-semibold leading-7 text-gray-500 hover:bg-blue-50  hover:text-blue-500"
                 >
                   Kontak Kami
