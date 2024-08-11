@@ -10,8 +10,11 @@ const TablePengajuanMagang = () => {
   const router = useRouter();
   const { data: session } = useSession();
   const [dataMagang, setDataMagang] = useState<DataMagang[]>([]);
+  const [filteredDataMagang, setFilteredDataMagang] = useState<DataMagang[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingAction, setLoadingAction] = useState<string | null>(null);
+  const [selectedMonth, setSelectedMonth] = useState<string>("");
+  const [selectedPeriod, setSelectedPeriod] = useState<string>("");
 
   useEffect(() => {
     if (session && session.accessToken) {
@@ -22,9 +25,9 @@ const TablePengajuanMagang = () => {
               Authorization: `Bearer ${session.accessToken}`,
             },
           });
-          // Filter hanya yang statusnya pending
           const pendingMagang = response.data.users.filter((user: DataMagang) => user.status === "pending");
           setDataMagang(pendingMagang);
+          setFilteredDataMagang(pendingMagang);
         } catch (error) {
           console.error('Failed to fetch packages:', error);
         } finally {
@@ -35,6 +38,33 @@ const TablePengajuanMagang = () => {
       fetchPackages();
     }
   }, [session]);
+
+  useEffect(() => {
+    let filtered = dataMagang;
+
+    // Filter berdasarkan bulan jika ada yang dipilih
+    if (selectedMonth) {
+      filtered = filtered.filter(item => {
+        const month = new Date(item.created_at).getMonth() + 1; // +1 because getMonth() returns 0-11
+        return month === parseInt(selectedMonth);
+      });
+    }
+
+    // Filter berdasarkan periode jika ada yang dipilih
+    if (selectedPeriod) {
+      filtered = filtered.filter(item => {
+        const month = new Date(item.created_at).getMonth() + 1; // +1 because getMonth() returns 0-11
+        if (selectedPeriod === "Januari - Juni") {
+          return month >= 1 && month <= 6;
+        } else if (selectedPeriod === "Juli - Desember") {
+          return month >= 7 && month <= 12;
+        }
+        return true;
+      });
+    }
+
+    setFilteredDataMagang(filtered);
+  }, [selectedMonth, selectedPeriod, dataMagang]);
 
   const handleLihatDokumen = (id: string) => {
     router.push(`/dashboard/admin/magang/dokumen/${id}`);
@@ -48,7 +78,6 @@ const TablePengajuanMagang = () => {
           Authorization: `Bearer ${session?.accessToken}`,
         },
       });
-      // Update data setelah terima
       setDataMagang(dataMagang.filter(item => item.id !== id));
       toast.success('Pengajuan berhasil diterima!');
     } catch (error) {
@@ -67,7 +96,6 @@ const TablePengajuanMagang = () => {
           Authorization: `Bearer ${session?.accessToken}`,
         },
       });
-      // Update data setelah tolak
       setDataMagang(dataMagang.filter(item => item.id !== id));
       toast.success('Pengajuan berhasil ditolak!');
     } catch (error) {
@@ -110,6 +138,38 @@ const TablePengajuanMagang = () => {
 
   return (
     <div className="rounded-[10px] border mt-4 border-stroke bg-white p-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card sm:p-7.5">
+      <div className="flex justify-end mb-4 space-x-4">
+        <select 
+          value={selectedMonth} 
+          onChange={(e) => setSelectedMonth(e.target.value)}
+          className="border border-gray-300 dark:border-gray-700 rounded-md p-2 bg-white dark:bg-gray-800 text-black dark:text-white"
+        >
+          <option value="">Semua Bulan</option>
+          <option value="1">Januari</option>
+          <option value="2">Februari</option>
+          <option value="3">Maret</option>
+          <option value="4">April</option>
+          <option value="5">Mei</option>
+          <option value="6">Juni</option>
+          <option value="7">Juli</option>
+          <option value="8">Agustus</option>
+          <option value="9">September</option>
+          <option value="10">Oktober</option>
+          <option value="11">November</option>
+          <option value="12">Desember</option>
+        </select>
+
+        <select 
+          value={selectedPeriod} 
+          onChange={(e) => setSelectedPeriod(e.target.value)}
+          className="border border-gray-300 dark:border-gray-700 rounded-md p-2 bg-white dark:bg-gray-800 text-black dark:text-white"
+        >
+          <option value="">Semua Periode</option>
+          <option value="Januari - Juni">Januari - Juni</option>
+          <option value="Juli - Desember">Juli - Desember</option>
+        </select>
+      </div>
+
       <div className="max-w-full overflow-x-auto">
         <table className="w-full table-auto">
           <thead>
@@ -138,25 +198,25 @@ const TablePengajuanMagang = () => {
             </tr>
           </thead>
           <tbody>
-            {dataMagang.map((item, index) => (
+            {filteredDataMagang.map((item, index) => (
               <tr key={index}>
                 <td
                   className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
-                    index === dataMagang.length - 1 ? "border-b-0" : "border-b"
+                    index === filteredDataMagang.length - 1 ? "border-b-0" : "border-b"
                   }`}
                 >
                   {index + 1}
                 </td>
                 <td
                   className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
-                    index === dataMagang.length - 1 ? "border-b-0" : "border-b"
+                    index === filteredDataMagang.length - 1 ? "border-b-0" : "border-b"
                   }`}
                 >
                   <h5 className="text-dark dark:text-white">{item.nama}</h5>
                 </td>
                 <td
                   className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${
-                    index === dataMagang.length - 1 ? "border-b-0" : "border-b"
+                    index === filteredDataMagang.length - 1 ? "border-b-0" : "border-b"
                   }`}
                 >
                   <button
@@ -167,7 +227,7 @@ const TablePengajuanMagang = () => {
                 </td>
                 <td
                   className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
-                    index === dataMagang.length - 1 ? "border-b-0" : "border-b"
+                    index === filteredDataMagang.length - 1 ? "border-b-0" : "border-b"
                   }`}
                 >
                   <h5 className="text-dark dark:text-white">
@@ -177,21 +237,21 @@ const TablePengajuanMagang = () => {
 
                 <td
                   className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
-                    index === dataMagang.length - 1 ? "border-b-0" : "border-b"
+                    index === filteredDataMagang.length - 1 ? "border-b-0" : "border-b"
                   }`}
                 >
                   <h5 className="text-dark dark:text-white">{item.verifikasi}</h5>
                 </td>
                 <td
                   className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
-                    index === dataMagang.length - 1 ? "border-b-0" : "border-b"
+                    index === filteredDataMagang.length - 1 ? "border-b-0" : "border-b"
                   }`}
                 >
                   <h5 className="text-dark dark:text-white">{item.status}</h5>
                 </td>
                 <td
                   className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${
-                    index === dataMagang.length - 1 ? "border-b-0" : "border-b"
+                    index === filteredDataMagang.length - 1 ? "border-b-0" : "border-b"
                   }`}
                 >
                   <div className="flex items-center justify-end space-x-3.5">
