@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import ClickOutside from "@/components/ClickOutside";
 
-const DefaultSelectOption = ({ options }: any) => {
+interface DefaultSelectOptionProps {
+  options: string[];
+  onChange: (option: string) => void;
+}
+
+const DefaultSelectOption: React.FC<DefaultSelectOptionProps> = ({ options, onChange }) => {
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
+    onChange(option); // Memanggil onChange dengan opsi yang dipilih
     setIsOpen(false);
   };
 
