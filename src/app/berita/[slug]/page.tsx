@@ -20,7 +20,7 @@ export default function BeritaDetail(props: DetailBeritaProps) {
     const [beritaDetail, setBeritaDetail] = useState<BeritaDetail | null>(null);
 
     const getFullImageUrl = (path: string) => {
-        return `http://192.168.206.22:8000/${path}`;
+        return `http://127.0.0.1:8000/${path}`;
     };
     
     const formatTanggal = (tanggal: string) => {

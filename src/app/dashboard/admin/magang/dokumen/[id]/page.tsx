@@ -83,7 +83,7 @@ const DokumenMagang = () => {
                   <iframe
                     src={`http://127.0.0.1:8000/${dataDokumen.surat_magang}`}
                     title="Surat Magang"
-                    className="w-full h-[100vh] border rounded-full"
+                    className="w-full h-[100vh] border"
                   />
                 </div>
               )}

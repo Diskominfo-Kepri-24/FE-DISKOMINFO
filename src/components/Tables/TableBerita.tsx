@@ -153,7 +153,7 @@ const TableBerita = () => {
                       index === dataBerita.length - 1 ? "border-b-0" : "border-b"
                     }`}
                   >
-                    <p className="text-dark dark:text-white ">{item.isi_berita}</p>
+                    <p className="text-dark dark:text-white  break-words line-clamp-6">{item.isi_berita}</p>
                   </td>
                   <td
                     className={`border-[#eee] px-4 py-4  dark:border-dark-3 ${
