@@ -17,7 +17,7 @@ export default function Berita() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const itemsPerPage = 8;
-    console.log(dataBerita);
+    // console.log(dataBerita);
   const fetchData = async () => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/berita`);

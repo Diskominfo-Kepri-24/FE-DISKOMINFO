@@ -1,40 +1,55 @@
+"use client";
+import axios from "axios";
 import ImageCard from "./ImageCard";
+import Pagination from "../../../components/Pagination";
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
+import { useEffect, useState } from "react";
+
+interface Gallery {
+  id: string;
+  title: string;
+  image: string;
+}
+
 export default function Gallery() {
-  const images = [
-    {
-      url: "https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Boost your conversion rate lorem lorem loerm loerm loerm"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Boost your conversion rate lorem lorem loerm loerm loerm"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Boost your conversion rate lorem lorem loerm loerm loerm"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Boost your conversion rate lorem lorem loerm loerm loerm"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Boost your conversion rate lorem lorem loerm loerm loerm"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Boost your conversion rate lorem lorem loerm loerm loerm"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Boost your conversion rate lorem lorem loerm loerm loerm"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1638049846933-10f57e4216ca?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Boost your conversion rate lorem lorem loerm loerm loerm"
-    }
-  ];
+  const [dataGallery, setDataGallery] = useState<Gallery[]>([]);
+  const [filteredDataGallery, setFilteredDataGallery] = useState<Gallery[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(8);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    const fetchDataGallery = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/v1/gallery');
+        setDataGallery(response.data.images);
+        setFilteredDataGallery(response.data.images);
+      } catch (error) {
+        console.error('Error fetching gallery list', error);
+      }
+    };
+    fetchDataGallery();
+  }, []);
+
+  useEffect(() => {
+    const filtered = dataGallery.filter(item =>
+      item.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredDataGallery(filtered);
+    setCurrentPage(1);
+  }, [searchQuery, dataGallery]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredDataGallery.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className="bg-slate-50 pt-20">
@@ -61,81 +76,34 @@ export default function Gallery() {
           </ol>
         </nav>
       </div>
-      {/* card */}
+      
+      {/* Search Bar */}
+      <div className="container mx-auto text-end px-10 pb-4">
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          placeholder="Search by Judul..."
+          className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
+        />
+      </div>
+
+      {/* Cards */}
       <div className="container mx-auto px-10 pb-20">
-        <div className="mx-auto  grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none md:grid-cols-3 lg:grid-cols-4">
-          {images.map((image, index) => (
-            <ImageCard key={index} imageUrl={image.url} title={image.title} />
+        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none md:grid-cols-3 lg:grid-cols-4">
+          {currentItems.map((item, index) => (
+            <ImageCard key={index} imageUrl={item.image} title={item.title} />
           ))}
         </div>
       </div>
-          {/* pagination */}
-      <div className="flex flex-col items-center px-4 py-3 sm:px-6">
-    <div className="flex flex-1 justify-center mb-4">
-        <nav aria-label="Pagination" className="isolate inline-flex -space-x-px rounded-md shadow-sm">
-            <a
-                href="#"
-                className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-                <span className="sr-only">Previous</span>
-                <ChevronLeftIcon aria-hidden="true" className="h-5 w-5" />
-            </a>
-            <a
-                href="#"
-                aria-current="page"
-                className="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-                1
-            </a>
-            <a
-                href="#"
-                className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-                2
-            </a>
-            <a
-                href="#"
-                className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"
-            >
-                3
-            </a>
-            <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">
-                ...
-            </span>
-            <a
-                href="#"
-                className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"
-            >
-                8
-            </a>
-            <a
-                href="#"
-                className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-                9
-            </a>
-            <a
-                href="#"
-                className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-                10
-            </a>
-            <a
-                href="#"
-                className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-                <span className="sr-only">Next</span>
-                <ChevronRightIcon aria-hidden="true" className="h-5 w-5" />
-            </a>
-        </nav>
-    </div>
-    <div className="text-center">
-        <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">1</span> to <span className="font-medium">10</span> of{' '}
-            <span className="font-medium">97</span> results
-        </p>
-    </div>
-            </div>
+
+      {/* Pagination */}
+      <Pagination
+        currentPage={currentPage}
+        totalItems={filteredDataGallery.length}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }
