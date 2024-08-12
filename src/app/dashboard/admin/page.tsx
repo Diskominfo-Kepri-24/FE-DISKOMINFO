@@ -11,7 +11,7 @@ import ChartOne from '@/components/Charts/ChartOne';
 const AdminDashboard = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
-
+  console.log(session.user.accessToken);
   useEffect(() => {
     if (status === 'loading') {
       return; // Tampilkan loading saat menunggu status sesi
