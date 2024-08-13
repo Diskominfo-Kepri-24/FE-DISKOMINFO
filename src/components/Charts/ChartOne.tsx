@@ -20,7 +20,7 @@ const ChartOne: React.FC = () => {
     if (session && session.accessToken) {
       const fetchPackages = async () => {
         try {
-          const response = await axios.get('http://127.0.0.1:8000/api/v1/user-magang', {
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/user-magang`, {
             headers: {
               Authorization: `Bearer ${session.accessToken}`,
             },

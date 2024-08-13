@@ -25,7 +25,7 @@ const UpdateBerita = () => {
     const fetchBerita = async () => {
       if (slugParams) {
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/v1/berita/${slugParams}`);
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/berita/${slugParams}`);
           const { judul, isi_berita, kategori, gambar, slug } = response.data.data;
           setJudul(judul);
           setIsiBerita(isi_berita);
@@ -72,7 +72,7 @@ const UpdateBerita = () => {
       console.log(isiBerita);
       console.log(kategori);
 
-      await axios.post(`http://127.0.0.1:8000/api/v1/berita/${slugParams}`, formData, {
+      await axios.post(`${process.env.NEXT_PUBLIC_LINK_API}/berita/${slugParams}`, formData, {
         headers: {
           Authorization: `Bearer ${session.accessToken}`,
           'Content-Type': 'multipart/form-data'

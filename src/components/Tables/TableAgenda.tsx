@@ -37,7 +37,7 @@ const TableAgenda = () => {
 
   const fetchAgendaData = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/v1/agenda');
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/agenda`);
       setAgendaData(response.data.agenda);
     } catch (err) {
       setError('Failed to fetch data');
@@ -55,7 +55,7 @@ const TableAgenda = () => {
     if (session?.accessToken) {
       setDeleting(slug); 
       try {
-        await axios.delete(`http://127.0.0.1:8000/api/v1/agenda/${slug}`, {
+        await axios.delete(`${process.env.NEXT_PUBLIC_LINK_API}/agenda/${slug}`, {
           headers: {
             Authorization: `Bearer ${session.accessToken}`,
             'Content-Type': 'multipart/form-data'
@@ -210,7 +210,7 @@ const TableAgenda = () => {
                     }`}
                   >
                     <img
-                      src={`http://127.0.0.1:8000/${agendaItem.foto}`}
+                      src={`${process.env.NEXT_PUBLIC_LINK_API_IMAGE}/${agendaItem.foto}`}
                       alt={agendaItem.judul}
                       className="w-32 h-auto"
                     />

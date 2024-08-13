@@ -24,7 +24,7 @@ const DokumenMagang = () => {
     if (session && session.accessToken && idParams) {
       const fetchPackages = async () => {
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/v1/user-magang/${idParams}`, {
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/user-magang/${idParams}`, {
             headers: {
               Authorization: `Bearer ${session.accessToken}`,
             },
@@ -81,7 +81,7 @@ const DokumenMagang = () => {
               {showDocument && (
                 <div className="mt-4">
                   <iframe
-                    src={`http://127.0.0.1:8000/${dataDokumen.surat_magang}`}
+                    src={`${process.env.NEXT_PUBLIC_LINK_API_IMAGE}/${dataDokumen.surat_magang}`}
                     title="Surat Magang"
                     className="w-full h-[100vh] border"
                   />

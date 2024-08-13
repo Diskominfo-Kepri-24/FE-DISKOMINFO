@@ -61,7 +61,7 @@ export default function RegisterMagang() {
     formData.append('alasan_magang', alasanMagang);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/v1/register/magang', formData, {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_LINK_API}/register/magang`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

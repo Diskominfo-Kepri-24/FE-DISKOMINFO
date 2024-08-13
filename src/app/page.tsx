@@ -117,7 +117,7 @@ export default function Home() {
           {beritaTerkini &&(
             <article className="flex flex-col md:items-center lg:items-start gap-4 md:flex-row lg:flex-col lg:gap-6">
                   <a href={`/berita/${beritaTerkini.slug}`} className="group relative block h-56 w-full shrink-0 self-start overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-24 md:w-24 lg:h-full lg:w-full">
-                      <img src={`http://127.0.0.1:8000/${beritaTerkini.gambar}`} loading="lazy" alt="" className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                      <img src={`${process.env.NEXT_PUBLIC_LINK_API_IMAGE}/${beritaTerkini.gambar}`} loading="lazy" alt="" className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
                   </a>
                   <div> 
                       <h2 className="text-xl font-bold text-gray-800">
@@ -141,7 +141,7 @@ export default function Home() {
                 {beritaTerbaru.map((item)=>
                 <article key={item.id} className="flex flex-col items-center gap-4 md:flex-row lg:gap-6">
                 <a  href={`/berita/${item.slug}`}className="group relative block h-56 w-full shrink-0 self-start overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-24 md:w-24 lg:h-24 lg:w-24">
-                    <img src={`http://127.0.0.1:8000/${item.gambar}`} loading="lazy" alt="" className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                    <img src={`${process.env.NEXT_PUBLIC_LINK_API_IMAGE}/${item.gambar}`} loading="lazy" alt="" className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
                 </a>
                 <div className="flex flex-col gap-2">
                     <h2 className="text-md font-bold text-gray-800">

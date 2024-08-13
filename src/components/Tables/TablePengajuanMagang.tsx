@@ -20,7 +20,7 @@ const TablePengajuanMagang = () => {
     if (session && session.accessToken) {
       const fetchPackages = async () => {
         try {
-          const response = await axios.get('http://127.0.0.1:8000/api/v1/user-magang', {
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/user-magang`, {
             headers: {
               Authorization: `Bearer ${session.accessToken}`,
             },
@@ -73,7 +73,7 @@ const TablePengajuanMagang = () => {
   const handleTerima = async (id: string) => {
     setLoadingAction(id);
     try {
-      await axios.put(`http://127.0.0.1:8000/api/v1/user-magang/terima/${id}`, {}, {
+      await axios.put(`${process.env.NEXT_PUBLIC_LINK_API}/user-magang/terima/${id}`, {}, {
         headers: {
           Authorization: `Bearer ${session?.accessToken}`,
         },
@@ -91,7 +91,7 @@ const TablePengajuanMagang = () => {
   const handleTolak = async (id: string) => {
     setLoadingAction(id);
     try {
-      await axios.put(`http://127.0.0.1:8000/api/v1/user-magang/tolak/${id}`, {}, {
+      await axios.put(`${process.env.NEXT_PUBLIC_LINK_API}/user-magang/tolak/${id}`, {}, {
         headers: {
           Authorization: `Bearer ${session?.accessToken}`,
         },

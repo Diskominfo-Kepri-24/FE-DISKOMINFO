@@ -56,7 +56,7 @@ const CreateAgenda = () => {
     formData.append('tgl_event_akhir', formattedTglEventAkhir);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/v1/agenda', 
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_LINK_API}/agenda`, 
         formData,
         { headers: { 
           'Authorization':  `Bearer ${session.accessToken}`,

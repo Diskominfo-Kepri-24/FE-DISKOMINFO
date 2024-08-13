@@ -23,7 +23,7 @@ const TablePembimbing = () => {
     if (session && session.accessToken) {
       const fetchDataPembimbing = async () => {
         try {
-          const response = await axios.get('http://127.0.0.1:8000/api/v1/pembimbing', {
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/pembimbing`, {
             headers: {
               Authorization: `Bearer ${session.accessToken}`,
             },
@@ -50,7 +50,7 @@ const TablePembimbing = () => {
     if (session?.accessToken) {
       setLoading(id); 
       try {
-        await axios.delete(`http://127.0.0.1:8000/api/v1/pembimbing/${id}`, {
+        await axios.delete(`${process.env.NEXT_PUBLIC_LINK_API}/pembimbing/${id}`, {
           headers: {
             Authorization: `Bearer ${session.accessToken}`,
             'Content-Type': 'multipart/form-data'

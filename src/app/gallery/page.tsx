@@ -21,7 +21,7 @@ export default function Gallery() {
   useEffect(() => {
     const fetchDataGallery = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/v1/gallery');
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/gallery`);
         setDataGallery(response.data.images);
         setFilteredDataGallery(response.data.images);
       } catch (error) {

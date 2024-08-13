@@ -92,8 +92,13 @@ export default function Berita() {
                   className="block w-full transform transition-transform duration-300 cursor-pointer"
                 >
                   <div className="w-full h-32 overflow-hidden rounded-2xl mb-4">
-                    <img
+                    {/* <img
                       src={`http://127.0.0.1:8000/${berita.gambar}`}
+                      alt={berita.judul}
+                      className="object-cover w-full h-full rounded-2xl"
+                    /> */}
+                    <img
+                      src={`${process.env.NEXT_PUBLIC_LINK_API_IMAGE}/${berita.gambar}`}
                       alt={berita.judul}
                       className="object-cover w-full h-full rounded-2xl"
                     />

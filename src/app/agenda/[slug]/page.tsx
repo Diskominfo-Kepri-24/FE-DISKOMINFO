@@ -30,7 +30,7 @@ export default function DetailAgenda() {
 
     const fetchAgendaData = async () => {
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/v1/agenda/${slugParams}`);
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/agenda/${slugParams}`);
           setAgendaData(response.data.agenda);
         } catch (err) {
           setError('Failed to fetch data');
@@ -106,7 +106,7 @@ export default function DetailAgenda() {
                             <h1 className="font-bold text-gray-900 mt-8 mb-5">Poster Event:</h1>
                             <div className="w-full h-full relative">
                                 <img 
-                                    src={`http://127.0.0.1:8000/${agendaData.foto}`} 
+                                    src={`${process.env.NEXT_PUBLIC_LINK_API_IMAGE}/${agendaData.foto}`} 
                                     alt="Event Poster" 
                                     className="w-full h-full object-cover"
                                 />

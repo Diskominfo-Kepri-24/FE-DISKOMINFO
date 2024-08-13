@@ -26,7 +26,7 @@ const TableGallery = () => {
   useEffect(() => {
     const fetchDataGallery = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/v1/gallery');
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/gallery`);
         const allItems = response.data.images;
         setDataGallery(allItems);
         setFilteredDataGallery(allItems);
@@ -57,7 +57,7 @@ const TableGallery = () => {
     if (session?.accessToken) {
       setLoading(id); // Set loading state for the specific id
       try {
-        await axios.delete(`http://127.0.0.1:8000/api/v1/gallery/${id}`, {
+        await axios.delete(`${process.env.NEXT_PUBLIC_LINK_API}/gallery/${id}`, {
           headers: {
             Authorization: `Bearer ${session.accessToken}`,
             'Content-Type': 'multipart/form-data'
@@ -73,7 +73,7 @@ const TableGallery = () => {
           progress: undefined,
         });
         // Refresh data after deletion
-        const response = await axios.get('http://127.0.0.1:8000/api/v1/gallery');
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/gallery`);
         setDataGallery(response.data.images);
       } catch (error) {
         toast.error('Gagal menghapus gallery!', {
@@ -157,7 +157,7 @@ const TableGallery = () => {
                   </td>
                   <td className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === currentItems.length - 1 ? "border-b-0" : "border-b"}`}>
                     <img
-                      src={`http://127.0.0.1:8000/${item.image}`}
+                      src={`${process.env.NEXT_PUBLIC_LINK_API_IMAGE}/${item.image}`}
                       alt={`Gambar Gallery ${item.title}`}
                       className="w-full h-50 object-fit"
                     />

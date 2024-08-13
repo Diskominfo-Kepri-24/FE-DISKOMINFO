@@ -34,7 +34,7 @@ const CreatePembimbing = () => {
     };
 
     try {
-      await axios.post('http://127.0.0.1:8000/api/v1/register/pembimbing', formData);
+      await axios.post(`${process.env.NEXT_PUBLIC_LINK_API}/register/pembimbing`, formData);
       toast.success('Registrasi Pembimbing berhasil ditambahkan!');
 
       setTimeout(() => {

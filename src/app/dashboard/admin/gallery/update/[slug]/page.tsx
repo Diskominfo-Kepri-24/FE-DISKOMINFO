@@ -22,7 +22,7 @@ const UpdateGallery = () => {
     const fetchGallery = async () => {
       if (idParams) {
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/v1/gallery/${idParams}`);
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/gallery/${idParams}`);
           const { title, gambar } = response.data.gallery;
           // console.log(response);
           // console.log(idParams);
@@ -60,7 +60,7 @@ const UpdateGallery = () => {
         return;
       }
 
-      await axios.post(`http://127.0.0.1:8000/api/v1/gallery/${idParams}`, formData, {
+      await axios.post(`${process.env.NEXT_PUBLIC_LINK_API}/gallery/${idParams}`, formData, {
         headers: {
           Authorization: `Bearer ${session.accessToken}`,
           'Content-Type': 'multipart/form-data'

@@ -31,7 +31,7 @@ const Agenda = () => {
 
   const fetchAgendaData = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/v1/agenda');
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/agenda`);
       setAgendaData(response.data.agenda);
     } catch (err) {
       setError('Failed to fetch data');

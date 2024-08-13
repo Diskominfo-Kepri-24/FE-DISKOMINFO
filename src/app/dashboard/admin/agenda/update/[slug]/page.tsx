@@ -30,7 +30,7 @@ const UpdateAgenda = () => {
   useEffect(() => {
     if (slug) {
       // Fetch existing data for the agenda
-      axios.get(`http://127.0.0.1:8000/api/v1/agenda/${slug}`)
+      axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/agenda/${slug}`)
         .then(response => {
           const agenda = response.data.agenda;
           setJudul(agenda.judul);
@@ -81,7 +81,7 @@ const UpdateAgenda = () => {
       formData.append('tgl_event_mulai', formattedTglEventMulai); // format datetime-local
       formData.append('tgl_event_akhir', formattedTglEventAkhir); // format datetime-local
 
-      await axios.post(`http://127.0.0.1:8000/api/v1/agenda/${slug}`, formData, {
+      await axios.post(`${process.env.NEXT_PUBLIC_LINK_API}/agenda/${slug}`, formData, {
         headers: {
           'Authorization': `Bearer ${session.accessToken}`,
           'Content-Type': 'multipart/form-data'

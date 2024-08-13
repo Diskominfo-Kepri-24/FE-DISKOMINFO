@@ -32,7 +32,7 @@ const CreateGallery = () => {
     }
 
     try {
-      await axios.post('http://127.0.0.1:8000/api/v1/gallery', formData, {
+      await axios.post(`${process.env.NEXT_PUBLIC_LINK_API}/gallery`, formData, {
         headers: {
           Authorization: `Bearer ${session.accessToken}`,
           'Content-Type': 'multipart/form-data'

@@ -26,7 +26,7 @@ const TableBerita = () => {
   useEffect(() => {
     const fetchDataBerita = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/v1/berita`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/berita`);
         setDataBerita(response.data.data.data);
       } catch (error) {
         console.error(`Error fetching berita list`, error);
@@ -47,7 +47,7 @@ const TableBerita = () => {
     if (session?.accessToken) {
       setLoading(slug);
       try {
-        await axios.delete(`http://127.0.0.1:8000/api/v1/berita/${slug}`, {
+        await axios.delete(`${process.env.NEXT_PUBLIC_LINK_API}/berita/${slug}`, {
           headers: {
             Authorization: `Bearer ${session.accessToken}`,
             'Content-Type': 'multipart/form-data'
@@ -196,7 +196,7 @@ const TableBerita = () => {
                     }`}
                   >
                     <img
-                      src={`http://127.0.0.1:8000/${item.gambar}`}
+                      src={`${process.env.NEXT_PUBLIC_LINK_API_IMAGE}/${item.gambar}`}
                       alt={`Gambar Berita ${item.judul}`}
                       className="w-full h-25 object-fit"
                     />

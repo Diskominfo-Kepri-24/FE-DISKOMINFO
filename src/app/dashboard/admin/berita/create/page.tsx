@@ -38,7 +38,7 @@ const CreateBerita = () => {
     }
 
     try {
-      await axios.post('http://127.0.0.1:8000/api/v1/berita', formData, {
+      await axios.post(`${process.env.NEXT_PUBLIC_LINK_API}/berita`, formData, {
         headers: {
           Authorization: `Bearer ${session.accessToken}`,
           'Content-Type': 'multipart/form-data'
