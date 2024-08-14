@@ -31,7 +31,7 @@ const UpdateProgram = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/program/${slug}`);
-        // console.log(response);
+        console.log(response);
         const program = response.data.program;
   
         setSlugProgram(program.slug);

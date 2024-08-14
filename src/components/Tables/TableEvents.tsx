@@ -31,13 +31,22 @@ interface Mentor {
   programs : string,
   
 }
+interface Skill {
+  id : string
+  title: string,
+  description: string,
+  program : string,
+
+}
 const TableEvents = () => {
 
   const [program, setProgram] = useState<Program[]>([]);
   const [mentor, setMentor] = useState<Mentor[]>([]);
+  const [skill, setSkill] = useState<Skill[]>([]);
   const [loading, setLoading] = useState<string | null>(null);
   // console.log(program)
-  console.log(mentor)
+  // console.log(mentor);
+  // console.log(skill)
   const { data: session } = useSession();
   useEffect(() => {
     const fetchDataProgram = async () => {
@@ -61,10 +70,27 @@ const TableEvents = () => {
         });
         setMentor(response.data.mentor);
       } catch (error) {
-        console.error(`Error fetching program list`, error);
+        console.error(`Error fetching mentor`, error);
       }
     }
     fetchDataMentor();
+  }, [session]);
+
+  useEffect(() => {
+    const fetchDataSkill = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/skill`,{
+          headers: {
+            Authorization: `Bearer ${session?.accessToken}`,
+          }
+        });
+        // console.log(response.data.skills);
+        setSkill(response.data.skills);
+      } catch (error) {
+        console.error(`Error fetching skill `, error);
+      }
+    }
+    fetchDataSkill();
   }, [session]);
 
   const router = useRouter();
@@ -185,7 +211,53 @@ const TableEvents = () => {
       });
     }
   };
-
+  const handleDeleteSkill = async (id: string) => {
+    if (session?.accessToken) {
+      setLoading(id);
+      try {
+        await axios.delete(`${process.env.NEXT_PUBLIC_LINK_API}/skill/${id}`, {
+          headers: {
+            Authorization: `Bearer ${session.accessToken}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        toast.success('Skill berhasil dihapus!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      } catch (error) {
+        toast.error('Gagal menghapus skill!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } finally {
+        setLoading(null);
+      }
+    } else {
+      toast.error('Session tidak ditemukan!', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
 
   return (
     <div>
@@ -404,7 +476,7 @@ const TableEvents = () => {
                   No
                 </th>
                 <th className=" px-4 py-4 font-medium text-dark dark:text-white xl:pl-7.5">
-                Skill Dari Id Program 
+                Program 
                 </th>
                 <th className=" px-4 py-4 font-medium text-dark dark:text-white">
                   Title
@@ -418,98 +490,61 @@ const TableEvents = () => {
               </tr>
             </thead>
             <tbody>
-              {/* {agendaData.map((agendaItem, index) => (
-                <tr key={agendaItem.id}>
+              {skill.map((skillItem, index) => (
+                <tr key={skillItem.id}>
+              
                   <td
                     className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
+                      index === skill.length - 1 ? "border-b-0" : "border-b"
                     }`}
                   >
                     {index + 1}
                   </td>
                   <td
                     className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
+                      index === skill.length - 1 ? "border-b-0" : "border-b"
                     }`}
                   >
-                    <h5 className="text-dark dark:text-white">{agendaItem.judul}</h5>
+                    <h5 className="text-dark dark:text-white">{skillItem.program.title}</h5>
                   </td>
                   <td
-                    className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
+                    className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
+                      index === skill.length - 1 ? "border-b-0" : "border-b"
                     }`}
                   >
-                    <p className="text-dark dark:text-white">{agendaItem.slug}</p>
+                    <h5 className="text-dark dark:text-white">{skillItem.title}</h5>
                   </td>
                   <td
-                    className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
+                    className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
+                      index === skill.length - 1 ? "border-b-0" : "border-b"
                     }`}
                   >
-                    <p className="text-dark dark:text-white">{agendaItem.status}</p>
+                    <h5 className="text-dark dark:text-white">{skillItem.description}</h5>
                   </td>
-                  <td
-                    className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
-                    }`}
-                  >
-                    <p className="text-dark dark:text-white">{agendaItem.tanggal_event_mulai}</p>
-                  </td>
-                  <td
-                    className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
-                    }`}
-                  >
-                    <p className="text-dark dark:text-white">{agendaItem.tanggal_event_akhir}</p>
-                  </td>
-                  <td
-                    className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
-                    }`}
-                  >
-                    <p className="text-dark dark:text-white">{agendaItem.tipe_acara}</p>
-                  </td>
-                  <td
-                    className={`border-[#eee] px-4 py-4 break-words max-w-lg dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
-                    }`}
-                  >
-                    <p className="text-dark dark:text-white break-words line-clamp-6">{agendaItem.isi_agenda}</p>
-                  </td>
-                  <td
-                    className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
-                    }`}
-                  >
-                    <img
-                      src={`${process.env.NEXT_PUBLIC_LINK_API_IMAGE}/${agendaItem.foto}`}
-                      alt={agendaItem.judul}
-                      className="w-32 h-auto"
-                    />
-                  </td>
+                  
                   <td
                     className={`border-[#eee] px-4 py-4 text-center dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
+                      index === skill.length - 1 ? "border-b-0" : "border-b"
                     }`}
                   >
                      <div className="flex items-center justify-end space-x-3.5">
                       <button
-                        onClick={() => handleUpdate(agendaItem.slug)}
+                        onClick={() => handleUpdateSkill(skillItem.id)}
                         className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
                       >
                         Update
                       </button>
                       <button
-                        onClick={() => handleDelete(agendaItem.slug)}
-                        disabled={deleting === agendaItem.slug} // Disable button while deleting
+                        onClick={() => handleDeleteSkill(skillItem.id)}
+                        disabled={loading === skillItem.id} // Disable button while deleting
                         className="rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600"
                       >
-                        {deleting === agendaItem.slug ? 'Deleting...' : 'Delete'}
+                        {loading === skillItem.id ? 'Deleting...' : 'Delete'}
                       </button>
                     </div>
                   </td>
                 </tr>
-              ))} */}
+              ))}
             </tbody>
           </table>
         </div>
