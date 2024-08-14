@@ -10,6 +10,7 @@ interface Berita {
   tanggal: string;
   kategori: string;
   judul: string;
+  last_updated: string;
 }
 
 export default function Berita() {
@@ -114,7 +115,9 @@ export default function Berita() {
                     <span className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">
                       {berita.kategori}
                     </span>
+                   
                   </div>
+                  <p className='text-xs'>{berita.last_updated}</p>
                   <h3 className="mt-4 text-lg font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap transition-all duration-300 hover:whitespace-normal hover:overflow-visible">
                     {berita.judul}
                   </h3>

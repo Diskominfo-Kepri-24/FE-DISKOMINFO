@@ -21,6 +21,7 @@ interface Berita {
   tanggal: string;
   kategori: string;
   judul: string;
+  last_updated :string
 }
 interface Program {
   id: string;
@@ -153,6 +154,7 @@ export default function Home() {
                       })}
                     </time></span>
                       <span   className="text-sm text-gray-700 px-4 rounded-xl text-center bg-slate-50 hover:bg-slate-100"> {beritaTerkini.kategori}</span>
+                      <span   className="text-sm text-gray-700 px-4 rounded-xl text-center bg-slate-50 "> {beritaTerkini.last_updated}</span>
 
                   </div>
               </article>
@@ -177,6 +179,7 @@ export default function Home() {
                       })}
                     </time></span>
                     <span   className="text-sm text-gray-700 px-4 rounded-xl text-center bg-slate-50 hover:bg-slate-100"> {item.kategori}</span>
+                    <span   className="text-sm text-gray-700 px-4 rounded-xl text-center bg-slate-50"> {item.last_updated}</span>
                     </div>
                 </div>
             </article>

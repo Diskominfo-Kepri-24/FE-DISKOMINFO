@@ -106,7 +106,7 @@ export default function EventDetail ()
                             <img
                                 src={`${process.env.NEXT_PUBLIC_LINK_API_IMAGE}/${dataProgram.image}`}
                                 alt={dataProgram.title}
-                                className="object-cover w-full h-80 object-cover rounded-2xl"
+                                className="object-cover w-full h-80  rounded-2xl"
                             />
                             </div>
                         </div>
