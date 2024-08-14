@@ -12,6 +12,7 @@ import { BsFillMortarboardFill } from "react-icons/bs";
 import { BiFolderPlus } from "react-icons/bi";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Link from "next/link";
 
 interface Berita {
   id: string;
@@ -21,12 +22,20 @@ interface Berita {
   kategori: string;
   judul: string;
 }
+interface Program {
+  id: string;
+  slug: string;
+  title: string;
+  image: string;
+ 
+}
 export default function Home() {
 
-  
-  const [dataBerita, setDataBerita] = useState<Berita[]>([]);
 
-  const fetchData = async () => {
+  const [dataProgram, setDataProgram] = useState<Program[]>([]);
+  const [dataBerita, setDataBerita] = useState<Berita[]>([]);
+  // console.log(dataProgram);
+  const fetchDataBerita = async () => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/berita`);
       setDataBerita(response.data.data.data);
@@ -34,13 +43,25 @@ export default function Home() {
       console.error(error);
     }
   };
+  const fetchDataProgram = async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/program`);
+      // console.log(response.data.program.data);
+      setDataProgram(response.data.program.data);
+     
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    fetchData();
+    fetchDataBerita();
+    fetchDataProgram();
   }, []);
 
   const beritaTerkini = dataBerita.length > 0 ? dataBerita[0] : null;
   const beritaTerbaru = dataBerita.length > 1 ? dataBerita.slice(1, 4) : [];
+  const ProgramTerbaru = dataProgram.length > 0 ? dataProgram.slice(0, 4) : [];
   // console.log(dataBerita);
   // console.log(beritaTerkini);
   // console.log(beritaTerbaru);
@@ -206,24 +227,30 @@ export default function Home() {
             customRightArrow={<CustomRightArrow />}
           >
             {/* Konten Carousel */}
-            <div className="p-4">
-              <a href="#" className="block bg-white w-full max-w-md rounded-2xl shadow-lg p-6 mx-auto border border-transparent hover:border-blue-500 transform transition-transform duration-300 hover:-translate-y-2 group cursor-pointer">
-                <div className="w-full h-32 overflow-hidden rounded-2xl">
-                  <Image src="/program/program-1.avif" alt="Logo" layout="responsive" width={100} height={48} className="object-cover w-full h-full rounded-t-2xl" />
-                </div>
-                <h3 className="mt-4 text-xl font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap hover:whitespace-normal hover:overflow-visible hover:cursor-pointer transition-all duration-300">
-                  Pelatihan Web Development Untuk Pemula Selama 30 Hari
-                </h3>
-                <div className="mt-4">
-                  <span className="py-1 px-3 flex font-medium items-center w-36 rounded-xl hover:bg-blue-100 text-sm text-blue-600 hover:text-blue-800">
-                    Selengkapnya
-                    <svg className="w-3 h-3 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                    </svg>
-                  </span>
-                </div>
-              </a>
-            </div>
+            {ProgramTerbaru.map((itemProgramTerbaru)=>
+            <div key={itemProgramTerbaru.id} className="p-4">
+            <a href="#" className="block bg-white w-full max-w-md rounded-2xl shadow-lg p-6 mx-auto border border-transparent hover:border-blue-500 transform transition-transform duration-300 hover:-translate-y-2 group cursor-pointer">
+              <div className="w-full h-32 overflow-hidden rounded-2xl">
+                <img src={`${process.env.NEXT_PUBLIC_LINK_API_IMAGE}/${itemProgramTerbaru.image}`} alt={itemProgramTerbaru.title}   className="object-cover w-full h-full rounded-t-2xl" />
+              </div>
+              <h3 className="mt-4 text-xl font-bold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap hover:whitespace-normal hover:overflow-visible hover:cursor-pointer transition-all duration-300">
+              {itemProgramTerbaru.title}
+              </h3>
+              <div className="mt-4">
+                <Link href={`/event/${itemProgramTerbaru.slug}`}>
+                <span className="py-1 px-3 flex font-medium items-center w-36 rounded-xl hover:bg-blue-100 text-sm text-blue-600 hover:text-blue-800">
+                  Selengkapnya
+                  <svg className="w-3 h-3 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  </svg>
+                </span>
+                </Link>
+                
+              </div>
+            </a>
+          </div>
+            )}
+            
             <div className="p-4">
               <a href="#" className="block bg-white w-full max-w-md rounded-2xl shadow-lg p-6 mx-auto border border-transparent hover:border-blue-500 transform transition-transform duration-300 hover:-translate-y-2 group cursor-pointer">
                 <div className="w-full h-32 overflow-hidden rounded-2xl">
