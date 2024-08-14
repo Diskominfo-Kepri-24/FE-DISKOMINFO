@@ -21,11 +21,23 @@ interface Program {
   tipe_mentoring: string
   tipe_modul: string
 }
+interface Mentor {
+  id : string
+  nama_mentor: string,
+  deskripsi_mentor: string,
+  foto_mentor: string,
+  link_linkedin: string,
+  title : string,
+  programs : string,
+  
+}
 const TableEvents = () => {
 
   const [program, setProgram] = useState<Program[]>([]);
+  const [mentor, setMentor] = useState<Mentor[]>([]);
   const [loading, setLoading] = useState<string | null>(null);
   // console.log(program)
+  console.log(mentor)
   const { data: session } = useSession();
   useEffect(() => {
     const fetchDataProgram = async () => {
@@ -38,6 +50,22 @@ const TableEvents = () => {
     }
     fetchDataProgram();
   }, []);
+
+  useEffect(() => {
+    const fetchDataMentor = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_LINK_API}/mentor`,{
+          headers: {
+            Authorization: `Bearer ${session?.accessToken}`,
+          }
+        });
+        setMentor(response.data.mentor);
+      } catch (error) {
+        console.error(`Error fetching program list`, error);
+      }
+    }
+    fetchDataMentor();
+  }, [session]);
 
   const router = useRouter();
   const handleCreateProgram = () => {
@@ -58,7 +86,7 @@ const TableEvents = () => {
     router.push(`/dashboard/admin/events/skill/update/${id}`);
   };
   const handleUpdateMentor = (id: string) => {
-    router.push(`/dashboard/admin/events/mentor/update${id}`);
+    router.push(`/dashboard/admin/events/mentor/update/${id}`);
   };
 
  
@@ -87,6 +115,53 @@ const TableEvents = () => {
         }, 3000);
       } catch (error) {
         toast.error('Gagal menghapus program!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } finally {
+        setLoading(null);
+      }
+    } else {
+      toast.error('Session tidak ditemukan!', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+  const handleDeleteMentor = async (id: string) => {
+    if (session?.accessToken) {
+      setLoading(id);
+      try {
+        await axios.delete(`${process.env.NEXT_PUBLIC_LINK_API}/mentor/${id}`, {
+          headers: {
+            Authorization: `Bearer ${session.accessToken}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        toast.success('Mentor berhasil dihapus!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      } catch (error) {
+        toast.error('Gagal menghapus mentor!', {
           position: "top-right",
           autoClose: 2000,
           hideProgressBar: false,
@@ -448,19 +523,19 @@ const TableEvents = () => {
                   No
                 </th>
                 <th className=" px-4 py-4 font-medium text-dark dark:text-white xl:pl-7.5">
-                Mentor Dari Id Program 
+                Program 
                 </th>
                 <th className=" px-4 py-4 font-medium text-dark dark:text-white">
-                nama_mentor 
+                Nama Mentor 
                 </th>
                 <th className=" px-4 py-4 font-medium text-dark dark:text-white">
-                deskripsi_mentor
+                Deskripsi Mentor
                 </th>
                 <th className="px-4 py-4 text-center font-medium text-dark dark:text-white xl:pr-7.5">
-                link_linkedin
+                Link Linkedin
                 </th>
                 <th className="px-4 py-4 text-center font-medium text-dark dark:text-white xl:pr-7.5">
-                foto_mentor 
+                Foto Mentor 
                 </th>
                 <th className="px-4 py-4 text-center font-medium text-dark dark:text-white xl:pr-7.5">
                 Aksi  
@@ -468,98 +543,78 @@ const TableEvents = () => {
               </tr>
             </thead>
             <tbody>
-              {/* {agendaData.map((agendaItem, index) => (
-                <tr key={agendaItem.id}>
+              {mentor.map((mentorItem, index) => (
+                <tr key={mentorItem.id}>
                   <td
                     className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
+                      index === mentor.length - 1 ? "border-b-0" : "border-b"
                     }`}
                   >
                     {index + 1}
                   </td>
                   <td
                     className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
+                      index === mentor.length - 1 ? "border-b-0" : "border-b"
                     }`}
                   >
-                    <h5 className="text-dark dark:text-white">{agendaItem.judul}</h5>
+                    <h5 className="text-dark dark:text-white">{mentorItem.programs[0].title}</h5>
                   </td>
                   <td
                     className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
+                      index === mentor.length - 1 ? "border-b-0" : "border-b"
                     }`}
                   >
-                    <p className="text-dark dark:text-white">{agendaItem.slug}</p>
+                    <p className="text-dark dark:text-white">{mentorItem.nama_mentor}</p>
                   </td>
                   <td
                     className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
+                      index === mentor.length - 1 ? "border-b-0" : "border-b"
                     }`}
                   >
-                    <p className="text-dark dark:text-white">{agendaItem.status}</p>
+                    <p className="text-dark dark:text-white">{mentorItem.deskripsi_mentor}</p>
                   </td>
                   <td
                     className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
+                      index === mentor.length - 1 ? "border-b-0" : "border-b"
                     }`}
                   >
-                    <p className="text-dark dark:text-white">{agendaItem.tanggal_event_mulai}</p>
+                    <p className="text-dark dark:text-white">{mentorItem.link_linkedin}</p>
                   </td>
+                 
                   <td
                     className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
-                    }`}
-                  >
-                    <p className="text-dark dark:text-white">{agendaItem.tanggal_event_akhir}</p>
-                  </td>
-                  <td
-                    className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
-                    }`}
-                  >
-                    <p className="text-dark dark:text-white">{agendaItem.tipe_acara}</p>
-                  </td>
-                  <td
-                    className={`border-[#eee] px-4 py-4 break-words max-w-lg dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
-                    }`}
-                  >
-                    <p className="text-dark dark:text-white break-words line-clamp-6">{agendaItem.isi_agenda}</p>
-                  </td>
-                  <td
-                    className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
+                      index === mentor.length - 1 ? "border-b-0" : "border-b"
                     }`}
                   >
                     <img
-                      src={`${process.env.NEXT_PUBLIC_LINK_API_IMAGE}/${agendaItem.foto}`}
-                      alt={agendaItem.judul}
+                      src={`${process.env.NEXT_PUBLIC_LINK_API_IMAGE}/${mentorItem.foto_mentor}`}
+                      alt={mentorItem.nama_mentor}
                       className="w-32 h-auto"
                     />
                   </td>
                   <td
                     className={`border-[#eee] px-4 py-4 text-center dark:border-dark-3 ${
-                      index === agendaData.length - 1 ? "border-b-0" : "border-b"
+                      index === mentor.length - 1 ? "border-b-0" : "border-b"
                     }`}
                   >
                      <div className="flex items-center justify-end space-x-3.5">
                       <button
-                        onClick={() => handleUpdate(agendaItem.slug)}
+                        onClick={() => handleUpdateMentor(mentorItem.id)}
                         className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
                       >
                         Update
                       </button>
                       <button
-                        onClick={() => handleDelete(agendaItem.slug)}
-                        disabled={deleting === agendaItem.slug} // Disable button while deleting
+                        onClick={() => handleDeleteMentor(mentorItem.id)}
+                        disabled={loading === mentorItem.id} 
                         className="rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600"
                       >
-                        {deleting === agendaItem.slug ? 'Deleting...' : 'Delete'}
+                        {loading === mentorItem.id ? 'Deleting...' : 'Delete'}
                       </button>
                     </div>
                   </td>
                 </tr>
-              ))} */}
+              ))}
             </tbody>
           </table>
         </div>
