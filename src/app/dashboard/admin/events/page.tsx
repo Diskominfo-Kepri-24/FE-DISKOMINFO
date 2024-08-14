@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import React from "react";
+import TableEvents from '@/components/Tables/TableEvents';
 
 const Events = () => {
   const { data: session, status } = useSession();
@@ -35,7 +36,7 @@ const Events = () => {
 
   return (
     <DefaultLayout>
-        <h1>Halaman Events</h1>
+        <TableEvents/>
     </DefaultLayout>
   );
 };
