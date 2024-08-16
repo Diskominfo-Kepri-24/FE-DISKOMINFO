@@ -143,7 +143,7 @@ export default function EventDetail ()
                                                                 </svg>
                                                                 </span>
                                                             </summary>
-                                                            <p className="group-open:animate-fadeIn mt-3 px-2 text-justify text-sm text-slate-900">
+                                                            <p className="group-open:animate-fadeIn mt-3 px-2 text-justify text-sm max-w-lg break-words text-slate-900">
                                                             {skillProgram.description}
                                                             </p>
                                                         </details>
