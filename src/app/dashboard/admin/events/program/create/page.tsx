@@ -25,6 +25,14 @@ const CreateProgram = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  const generateSlug = (title: string) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+      .replace(/\s+/g, '-') // replace spaces with -
+      .replace(/-+/g, '-') // collapse dashes
+      .trim();
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -73,7 +81,11 @@ const CreateProgram = () => {
       setIsLoading(false);
     }
   };
-
+  const handleJudulChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newJudul = e.target.value;
+    setJudul(newJudul);
+    setSlug(generateSlug(newJudul));
+  };
   return (
     <DefaultLayout>
       <ToastContainer />
@@ -87,6 +99,18 @@ const CreateProgram = () => {
           {/* Fields */}
           <div>
             <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+              Title
+            </label>
+            <input
+              type="text"
+              value={judul}
+              onChange={handleJudulChange}
+              placeholder="Judul"
+              className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+            />
+          </div>
+          <div>
+            <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
               Slug
             </label>
             <input
@@ -97,18 +121,7 @@ const CreateProgram = () => {
               className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
             />
           </div>
-          <div>
-            <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-              Title
-            </label>
-            <input
-              type="text"
-              value={judul}
-              onChange={(e) => setJudul(e.target.value)}
-              placeholder="Judul"
-              className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-            />
-          </div>
+          
           <div>
             <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
               Jadwal

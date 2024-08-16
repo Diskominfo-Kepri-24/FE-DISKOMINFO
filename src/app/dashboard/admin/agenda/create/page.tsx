@@ -22,6 +22,16 @@ const CreateAgenda = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  // Function to generate slug from title
+  const generateSlug = (title: string) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+      .replace(/\s+/g, '-') // replace spaces with -
+      .replace(/-+/g, '-') // collapse dashes
+      .trim();
+  };
+
   // Function to format date from 'datetime-local' to 'YYYY-MM-DD HH:MM:SS'
   const formatDateTime = (dateTimeLocal: string) => {
     const [date, time] = dateTimeLocal.split('T');
@@ -77,6 +87,12 @@ const CreateAgenda = () => {
     }
   };
 
+  const handleJudulChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newJudul = e.target.value;
+    setJudul(newJudul);
+    setSlug(generateSlug(newJudul));
+  };
+
   return (
     <DefaultLayout>
       <ToastContainer />
@@ -90,6 +106,18 @@ const CreateAgenda = () => {
           {/* Fields */}
           <div>
             <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+              Judul
+            </label>
+            <input
+              type="text"
+              value={judul}
+              onChange={handleJudulChange}
+              placeholder="Judul"
+              className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+            />
+          </div>
+          <div>
+            <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
               Slug
             </label>
             <input
@@ -98,20 +126,10 @@ const CreateAgenda = () => {
               onChange={(e) => setSlug(e.target.value)}
               placeholder="Slug"
               className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+              disabled // Disabled to ensure it's automatically generated
             />
           </div>
-          <div>
-            <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-              Judul
-            </label>
-            <input
-              type="text"
-              value={judul}
-              onChange={(e) => setJudul(e.target.value)}
-              placeholder="Judul"
-              className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-            />
-          </div>
+          
           <div>
             <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
               Status
@@ -174,15 +192,13 @@ const CreateAgenda = () => {
             <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
               Tipe Acara
             </label>
-            <select
+            <input
+              type="text"
               value={tipeAcara}
               onChange={(e) => setTipeAcara(e.target.value)}
+              placeholder="Tipe Acara"
               className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-            >
-              <option value="">Pilih Tipe Acara</option>
-              <option value="online">Online</option>
-              <option value="offline">Offline</option>
-            </select>
+            />
           </div>
           <div>
             <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
@@ -191,7 +207,6 @@ const CreateAgenda = () => {
             <textarea
               value={isiAgenda}
               onChange={(e) => setIsiAgenda(e.target.value)}
-              rows={4}
               placeholder="Isi Agenda"
               className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
             />
@@ -202,16 +217,16 @@ const CreateAgenda = () => {
             </label>
             <input
               type="file"
-              onChange={(e) => e.target.files && setGambar(e.target.files[0])}
+              onChange={(e) => setGambar(e.target.files?.[0] || null)}
               className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
             />
           </div>
           <button
             type="submit"
+            className={`inline-flex items-center justify-center rounded-md bg-primary py-2 px-4 text-white transition-all hover:bg-opacity-90 focus:bg-opacity-80 disabled:bg-gray-500 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
             disabled={isLoading}
-            className="w-full rounded-md bg-primary py-3 text-center text-white transition hover:bg-primary-dark disabled:opacity-50"
           >
-            {isLoading ? 'Loading...' : 'Kirim Agenda'}
+            {isLoading ? 'Loading...' : 'Create Agenda'}
           </button>
         </form>
       </div>

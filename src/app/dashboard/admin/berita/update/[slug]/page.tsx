@@ -40,6 +40,19 @@ const UpdateBerita = () => {
     fetchBerita();
   }, [slugParams]);
 
+  const generateSlug = (text: string) => {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-') // Mengganti karakter non-alphanumeric dengan "-"
+      .replace(/^-+|-+$/g, ''); // Menghapus "-" di awal dan akhir
+  };
+
+  useEffect(() => {
+    if (judul) {
+      setSlugData(generateSlug(judul));
+    }
+  }, [judul]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -65,12 +78,6 @@ const UpdateBerita = () => {
         setIsLoading(false);
         return;
       }
-      console.log(slugParams);
-      console.log(formData);
-      console.log(judul);
-      console.log(slugData);
-      console.log(isiBerita);
-      console.log(kategori);
 
       await axios.post(`${process.env.NEXT_PUBLIC_LINK_API}/berita/${slugParams}`, formData, {
         headers: {

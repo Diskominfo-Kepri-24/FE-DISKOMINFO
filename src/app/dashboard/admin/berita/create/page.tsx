@@ -17,6 +17,21 @@ const CreateBerita = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
+  const generateSlug = (text: string) => {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '') // Menghilangkan karakter selain huruf, angka, spasi, dan tanda strip
+      .trim()
+      .replace(/\s+/g, '-') // Mengganti spasi dengan tanda strip
+      .replace(/-+/g, '-'); // Menghindari adanya tanda strip berulang
+  };
+
+  const handleJudulChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newJudul = e.target.value;
+    setJudul(newJudul);
+    setSlug(generateSlug(newJudul));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -69,6 +84,18 @@ const CreateBerita = () => {
           </h3>
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-5.5 p-6.5">
+        <div>
+            <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+              Judul
+            </label>
+            <input
+              type="text"
+              value={judul}
+              onChange={handleJudulChange}
+              placeholder="Judul"
+              className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+            />
+          </div>
           <div>
             <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
               Slug
@@ -81,18 +108,7 @@ const CreateBerita = () => {
               className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
             />
           </div>
-          <div>
-            <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-              Judul
-            </label>
-            <input
-              type="text"
-              value={judul}
-              onChange={(e) => setJudul(e.target.value)}
-              placeholder="Judul"
-              className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-            />
-          </div>
+          
           <div>
             <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
               Isi Berita
